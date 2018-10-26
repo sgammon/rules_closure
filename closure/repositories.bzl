@@ -224,58 +224,6 @@ def com_google_auto_common():
   )
 
 def com_google_auto_factory():
-<<<<<<< HEAD
-    java_import_external(
-        name = "com_google_auto_factory",
-        licenses = ["notice"],  # Apache 2.0
-        jar_sha256 = "e6bed6aaa879f568449d735561a6a26a5a06f7662ed96ca88d27d2200a8dc6cf",
-        jar_urls = [
-            "https://mirror.bazel.build/repo1.maven.org/maven2/com/google/auto/factory/auto-factory/1.0-beta5/auto-factory-1.0-beta5.jar",
-            "https://repo1.maven.org/maven2/com/google/auto/factory/auto-factory/1.0-beta5/auto-factory-1.0-beta5.jar",
-        ],
-        # Auto Factory ships its annotations, runtime, and processor in the same
-        # jar. The generated code must link against this jar at runtime. So our
-        # goal is to introduce as little bloat as possible.The only class we need
-        # at runtime is com.google.auto.factory.internal.Preconditions. So we're
-        # not going to specify the deps of this jar as part of the java_import().
-        generated_rule_name = "jar",
-        extra_build_file_content = "\n".join([
-            "java_library(",
-            "    name = \"processor\",",
-            "    exports = [\":jar\"],",
-            "    runtime_deps = [",
-            "        \"@com_google_auto_common\",",
-            "        \"@com_google_auto_value\",",
-            "        \"@com_google_guava\",",
-            "        \"@com_google_java_format\",",
-            "        \"@com_squareup_javapoet\",",
-            "        \"@javax_inject\",",
-            "        \"@org_apache_tomcat_annotations_api\",",
-            "    ],",
-            ")",
-            "",
-            "java_plugin(",
-            "    name = \"AutoFactoryProcessor\",",
-            "    output_licenses = [\"unencumbered\"],",
-            "    processor_class = \"com.google.auto.factory.processor.AutoFactoryProcessor\",",
-            "    generates_api = 1,",
-            "    tags = [\"annotation=com.google.auto.factory.AutoFactory;genclass=${package}.${outerclasses}@{className|${classname}Factory}\"],",
-            "    deps = [\":processor\"],",
-            ")",
-            "",
-            "java_library(",
-            "    name = \"com_google_auto_factory\",",
-            "    exported_plugins = [\":AutoFactoryProcessor\"],",
-            "    exports = [",
-            "        \":jar\",",
-            "        \"@com_google_code_findbugs_jsr305\",",
-            "        \"@javax_annotation_jsr250_api\",",
-            "        \"@javax_inject\",",
-            "    ],",
-            ")",
-        ]),
-    )
-=======
   java_import_external(
       name = "com_google_auto_factory",
       licenses = ["notice"],  # Apache 2.0
@@ -325,7 +273,6 @@ def com_google_auto_factory():
           ")",
       ]),
   )
->>>>>>> parent of 7b4b99d... Format .bzl files with buildifier.
 
 def com_google_auto_value():
   # AutoValue 1.6+ shades Guava, Auto Common, and JavaPoet. That's OK
