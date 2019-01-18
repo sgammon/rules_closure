@@ -55,7 +55,7 @@ def _closure_css_binary(ctx):
         else:
             args += ["--rename", "CLOSURE"]
     else:
-        ctx.file_action(
+        ctx.actions.write(
             output = ctx.outputs.js,
             content = "// closure_css_binary target had renaming = false\n",
         )
@@ -91,8 +91,9 @@ def _closure_css_binary(ctx):
         ),
         runfiles = ctx.runfiles(
             files = files + ctx.files.data,
-            transitive_files = (collect_runfiles(deps) |
-                                collect_runfiles(ctx.attr.data)),
+            transitive_files = depset(
+                transitive = [collect_runfiles(deps), collect_runfiles(ctx.attr.data)],
+            ),
         ),
     )
 

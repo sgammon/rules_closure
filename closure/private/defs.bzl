@@ -94,15 +94,13 @@ def collect_js(
             fail("no_closure_library can't be used when Closure Library is " +
                  "already part of the transitive closure")
     elif has_direct_srcs and not has_closure_library:
-        tmp = depset(closure_library_base)
-        tmp += srcs
-        srcs = tmp
+        srcs = depset(closure_library_base, transitive = [srcs])
         has_closure_library = True
     if css:
-        tmp = depset(closure_library_base)
-        tmp += [css.closure_css_binary.renaming_map]
-        tmp += srcs
-        srcs = tmp
+        srcs = depset(
+            closure_library_base + [css.closure_css_binary.renaming_map],
+            transitive = [srcs],
+        )
     return struct(
         srcs = srcs,
         js_module_roots = js_module_roots,
@@ -116,36 +114,38 @@ def collect_js(
 
 def collect_css(deps, orientation = None):
     """Aggregates transitive CSS source files from unfurled deps."""
-    srcs = depset()
-    labels = depset()
+    srcs = []
+    labels = []
     for dep in deps:
-        srcs += getattr(dep.closure_css_library, "srcs", [])
-        labels += getattr(dep.closure_css_library, "labels", [])
+        if hasattr(dep.closure_css_library, "srcs"):
+            srcs.append(getattr(dep.closure_css_library, "srcs"))
+        if hasattr(dep.closure_css_library, "labels"):
+            labels.append(getattr(dep.closure_css_library, "labels"))
         if orientation:
             if dep.closure_css_library.orientation != orientation:
                 fail("%s does not have the same orientation" % dep.label)
         orientation = dep.closure_css_library.orientation
     return struct(
-        srcs = srcs,
-        labels = labels,
+        srcs = depset(transitive = srcs),
+        labels = depset(transitive = labels),
         orientation = orientation,
     )
 
 def collect_runfiles(targets):
     """Aggregates data runfiles from targets."""
-    data = depset()
+    data = []
     for target in targets:
         if hasattr(target, "closure_legacy_js_runfiles"):
-            data += target.closure_legacy_js_runfiles
+            data.append(target.closure_legacy_js_runfiles)
             continue
         if hasattr(target, "runfiles"):
-            data += target.runfiles.files
+            data.append(target.runfiles.files)
             continue
         if hasattr(target, "data_runfiles"):
-            data += target.data_runfiles.files
+            data.append(target.data_runfiles.files)
         if hasattr(target, "default_runfiles"):
-            data += target.default_runfiles.files
-    return data
+            data.append(target.default_runfiles.files)
+    return depset(transitive = data)
 
 def find_js_module_roots(srcs, workspace_name, label, includes):
     """Finds roots of JavaScript sources.
@@ -166,10 +166,10 @@ def find_js_module_roots(srcs, workspace_name, label, includes):
     new_bazel_version = Label("@foo//bar").workspace_root.startswith("../")
     if workspace_name != "__main__":
         if new_bazel_version:
-            roots += ["%s" % root for root in roots]
+            roots += ["%s" % root for root in roots.to_list()]
             roots += ["../%s" % workspace_name]
         else:
-            roots += ["%s/external/%s" % (root, workspace_name) for root in roots]
+            roots += ["%s/external/%s" % (root, workspace_name) for root in roots.to_list()]
             roots += ["external/%s" % workspace_name]
     if includes:
         for f in srcs:
@@ -188,7 +188,7 @@ def find_js_module_roots(srcs, workspace_name, label, includes):
                         break
                 if not found:
                     fail("No srcs found beginning with '%s/'" % include)
-            for root in roots:
+            for root in roots.to_list():
                 magic_roots.append("%s/%s" % (root, prefix))
         roots += magic_roots
     return roots
