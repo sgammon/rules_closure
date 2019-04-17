@@ -17,7 +17,7 @@ package(default_testonly = True)
 licenses(["notice"])  # Apache 2.0
 
 load("//closure/private:file_test.bzl", "file_test")
-load("//closure:defs.bzl", "closure_js_library")
+load("//closure:defs.bzl", "closure_js_library", "closure_js_binary")
 
 closure_js_library(
     name = "love",
@@ -67,5 +67,20 @@ file_test(
     name = "lenient_no_type_check_errors",
     # This is a dummy file to trigger per library type check
     file = "lenient_love_typecheck",
+    content = "",
+)
+
+closure_js_library(
+    name = "no_library_level_checks_love",
+    srcs = ["love.js"],
+    lenient = False,
+    library_level_checks = False,
+)
+
+# This variant demonstrates that although lenient is false (in the library)
+# typechecks were skipped (but will be at the binary level)
+file_test(    
+    name = "no_library_level_checks_file_test",
+    file = "no_library_level_checks_love_typecheck",
     content = "",
 )

@@ -110,6 +110,7 @@ def _closure_js_library_impl(
         internal_descriptors = depset(),
         no_closure_library = False,
         internal_expect_failure = False,
+        library_level_checks_enabled = True,
 
         # These file definitions for our outputs are deprecated,
         # and will be replaced with |actions.declare_file()| soon.
@@ -151,6 +152,11 @@ def _closure_js_library_impl(
         actions,
         deprecated_ijs_file,
         "%s.i.js" % label.name,
+    )
+    typecheck_file = _maybe_declare_file(
+        actions,
+        deprecated_typecheck_file,
+        "%s_typecheck" % label.name,
     )
 
     # Create a list of direct children of this rule. If any direct dependencies
@@ -291,20 +297,22 @@ def _closure_js_library_impl(
         progress_message = make_jschecker_progress_message(srcs, label),
     )
 
-    library_level_checks(
-        actions = actions,
-        label = label,
-        ijs_deps = js.ijs_files,
-        srcs = srcs,
-        executable = closure_worker,
-        output = _maybe_declare_file(
-            actions,
-            deprecated_typecheck_file,
-            "%s_typecheck" % label.name,
-        ),
-        suppress = suppress,
-        internal_expect_failure = internal_expect_failure,
-    )
+    # If the "library_level_checks_enabled" flag is set, run JsChecker on the
+    # library interface javascript files, otherwise write a empty file (and skip
+    # the JsChecker processing)
+    if library_level_checks_enabled:  
+        library_level_checks(
+            actions = actions,
+            label = label,
+            ijs_deps = js.ijs_files,
+            srcs = srcs,
+            executable = closure_worker,
+            output = typecheck_file,
+            suppress = suppress,
+            internal_expect_failure = internal_expect_failure,
+        )
+    else:
+        actions.write(typecheck_file, "")
 
     if type(internal_descriptors) == "list":
         internal_descriptors = depset(internal_descriptors)
@@ -412,6 +420,7 @@ def _closure_js_library(ctx):
         ctx.files.internal_descriptors,
         ctx.attr.no_closure_library,
         ctx.attr.internal_expect_failure,
+        ctx.attr.library_level_checks,
 
         # Deprecated output files.
         ctx.outputs.info,
@@ -459,6 +468,10 @@ closure_js_library = rule(
         "srcs": attr.label_list(allow_files = JS_FILE_TYPE),
         "suppress": attr.string_list(),
         "lenient": attr.bool(),
+        "library_level_checks": attr.bool(
+            default = True,
+            doc = "Run additional typechecks on the interface javascript (i.js) file",
+        ),
 
         # deprecated
         "externs": attr.label_list(allow_files = JS_FILE_TYPE),
