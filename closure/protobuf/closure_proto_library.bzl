@@ -97,7 +97,24 @@ def _closure_proto_aspect_impl(target, ctx):
         "unusedLocalVariables",
     ]
 
-    library = create_closure_js_library(ctx, srcs, deps, [], suppress, True)
+    protoinfo = target[ProtoInfo]
+    if not protoinfo:
+        fail("Failed to resolve ProtoInfo for target: %s." % target)
+
+    direct_descriptor = getattr(protoinfo, "direct_descriptor_set", None)
+    if direct_descriptor == None:
+        fail("No direct descriptor for target: %s" % target)
+
+    descriptor_list = None
+    transitive_descriptor_sets = getattr(protoinfo, "transitive_descriptor_sets", None)
+    if transitive_descriptor_sets == None:
+        transitive_descriptor_sets = []
+        descriptor_list = depset(direct = direct_descriptor, transitive = transitive_descriptor_sets)
+    else:
+        descriptor_list = depset(direct = [direct_descriptor])
+
+    library = create_closure_js_library(ctx, srcs, deps, [], suppress, True,
+        internal_descriptors = descriptor_list)
     return struct(
         exports = library.exports,
         closure_js_library = library.closure_js_library,

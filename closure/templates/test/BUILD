@@ -16,12 +16,17 @@ package(default_testonly = True)
 
 licenses(["notice"])  # Apache 2.0
 
-load("//closure:defs.bzl", "closure_java_template_library", "closure_js_library", "closure_js_proto_library", "closure_js_template_library", "closure_js_test", "closure_templates_plugin")
+load("//closure:defs.bzl", "closure_java_template_library", "closure_js_library", "closure_proto_library", "closure_js_template_library", "closure_js_test", "closure_templates_plugin")
 load("//closure/private:file_test.bzl", "file_test")
 
-closure_js_proto_library(
+proto_library(
     name = "person_proto",
     srcs = ["person.proto"],
+)
+
+closure_proto_library(
+    name = "person_closure_proto",
+    deps = [":person_proto"],
 )
 
 closure_js_template_library(
@@ -100,7 +105,7 @@ closure_js_template_library(
     srcs = ["greeter_proto.soy"],
     deps = [
         ":greeter_soy",
-        ":person_proto",
+        ":person_closure_proto",
     ],
 )
 
@@ -118,7 +123,7 @@ closure_js_library(
     srcs = ["greeter_proto.js"],
     deps = [
         ":greeter_proto_soy",
-        ":person_proto",
+        ":person_closure_proto",
         "//closure/library/soy",
     ],
 )
