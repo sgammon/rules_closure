@@ -967,10 +967,9 @@ def org_ow2_asm():
     java_import_external(
         name = "org_ow2_asm",
         jar_urls = [
-            "https://mirror.bazel.build/repo1.maven.org/maven2/org/ow2/asm/asm/6.0/asm-6.0.jar",
-            "https://repo1.maven.org/maven2/org/ow2/asm/asm/6.0/asm-6.0.jar",
+            "https://repo1.maven.org/maven2/org/ow2/asm/asm/7.0/asm-7.0.jar",
         ],
-        jar_sha256 = "dd8971c74a4e697899a8e95caae4ea8760ea6c486dc6b97b1795e75760420461",
+        jar_sha256 = "b88ef66468b3c978ad0c97fd6e90979e56155b4ac69089ba7a44e9aa7ffe9acf",
         licenses = ["notice"],  # BSD 3-clause
     )
 
