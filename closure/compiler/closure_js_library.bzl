@@ -46,7 +46,8 @@ def create_closure_js_library(
         exports = [],
         suppress = [],
         lenient = False,
-        convention = "CLOSURE"):
+        convention = "CLOSURE",
+        internal_descriptors = depset()):
     """ Returns closure_js_library metadata with provided attributes.
 
     Note that the returned struct is not a proper provider since existing contract
@@ -67,6 +68,9 @@ def create_closure_js_library(
         but also propagate up to closure_js_binary.
       lenient: makes the library lenient which suppresses handful of checkings in
         one shot.
+      convention: Coding convention to apply.
+      internal_descriptors: Proto descriptors defined within this target. Internal
+        use only, please.
 
     Returns:
       A closure_js_library metadata struct with exports and closure_js_library attribute
@@ -84,6 +88,7 @@ def create_closure_js_library(
         lenient = lenient,
         convention = convention,
         testonly = testonly,
+        internal_descriptors = internal_descriptors,
     )
 
 def _closure_js_library_impl(
