@@ -74,6 +74,7 @@ def rules_closure_dependencies(
         omit_com_google_protobuf_js = False,
         omit_com_google_template_soy = False,
         omit_com_google_template_soy_jssrc = False,
+        omit_com_google_template_soy_py_runtime = False,
         omit_com_ibm_icu_icu4j = False,
         omit_com_squareup_javapoet = False,
         omit_fonts_noto_hinted_deb = False,
@@ -162,6 +163,8 @@ def rules_closure_dependencies(
         com_google_template_soy()
     if not omit_com_google_template_soy_jssrc:
         com_google_template_soy_jssrc()
+    if not omit_com_google_template_soy_py_runtime:
+        com_google_template_soy_py_runtime()
     if not omit_com_ibm_icu_icu4j:
         com_ibm_icu_icu4j()
     if not omit_com_squareup_javapoet:
@@ -818,6 +821,18 @@ def com_google_template_soy_jssrc():
             "https://repo1.maven.org/maven2/com/google/template/soy/2019-07-14/soy-2019-07-14-jssrc_js.jar",
         ],
         build_file = str(Label("//closure/templates:soy_jssrc.BUILD")),
+        type = "zip",
+    )
+
+def com_google_template_soy_py_runtime():
+    http_archive(
+        name = "com_google_template_soy_py_runtime",
+        sha256 = "48db095d43ba10a6f1e7090608cf98a1abc2592eb38295f4ce9fabf8c3bb2dc5",
+        urls = [
+            "https://github.com/bloombox/closure-templates/archive/ac6aab2a00e8f33634b990bc402993f16ffd5718.zip",
+        ],
+        strip_prefix = "closure-templates-ac6aab2a00e8f33634b990bc402993f16ffd5718/python",
+        build_file = str(Label("//closure/templates:soy_py.BUILD")),
         type = "zip",
     )
 
