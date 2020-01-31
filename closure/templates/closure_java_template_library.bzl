@@ -15,10 +15,121 @@
 """Utilities for compiling Closure Templates to Java.
 """
 
-load("@rules_java//java:defs.bzl", "java_library")
+load("@rules_java//java:defs.bzl", _java_library = "java_library")
+load("//closure/compiler:closure_js_aspect.bzl", "closure_js_aspect")
+load("//closure/private:defs.bzl", "SOY_FILE_TYPE", "unfurl")
+load("//closure/private:providers.bzl", "SoyInfo")
 
-_SOY_COMPILER_BIN = "@com_google_template_soy//:SoyParseInfoGenerator"
+_SOY_INFO_COMPILER_BIN = "@com_google_template_soy//:SoyParseInfoGenerator"
+_SOY_JAVA_COMPILER_BIN = "@com_google_template_soy//:SoyToJbcSrcCompiler"
 _SOY_LIBRARY = "@com_google_template_soy//:com_google_template_soy"
+
+
+def _impl(ctx):
+    jouts = [o for o in ctx.outputs.outputs if "SoyInfo.java" not in o.path]
+
+    args = []
+    iout_prefix = _soy__dirname([s for s in ctx.files.srcs][0].path)
+    iargs = ["--outputDirectory=%s/%s" %
+        (ctx.configuration.genfiles_dir.path, iout_prefix)]
+    iargs.append("--javaPackage=%s" % ctx.attr.java_package)
+    iargs.append("--javaClassNameSource=filename")
+
+    for arg in ctx.attr.defs:
+        if not arg.startswith("--") or (" " in arg and "=" not in arg):
+            fail("Please use --flag=value syntax for defs")
+        args += [arg]
+
+    inputs = []
+    for f in ctx.files.srcs:
+        args.append("--srcs=" + f.path)
+        inputs.append(f)
+
+    protodeps = []
+    for dep in ctx.attr.proto_deps:
+        if dep not in protodeps:
+            for descriptor in dep.closure_js_library.descriptors.to_list():
+                if descriptor.path not in protodeps:
+                    protodeps.append(descriptor)
+                    args += ["--protoFileDescriptors=%s" % descriptor.path]
+                    inputs.append(descriptor)
+
+    for dep in unfurl(ctx.attr.deps, provider = "closure_js_library"):
+        dep_descriptors = getattr(dep.closure_js_library, "descriptors", None)
+        if dep_descriptors:
+            for f in dep_descriptors.to_list():
+                if f not in protodeps:
+                    protodeps.append(f)
+                    args += ["--protoFileDescriptors=%s" % f.path]
+                    inputs.append(f)
+
+    soydeps = []
+
+    ## new style begins here
+    for dep in unfurl(ctx.attr.deps):
+        dep_templates = getattr(dep.actions[0], "outputs", None)
+        if dep_templates:
+            for f in dep_templates.to_list():
+                if f.path not in soydeps:
+                    soydeps.append(f.path)
+                    inputs.append(f)
+        else:
+            fail("Failed to resolve output templates for SoyInfo dependency.")
+
+    ## prep dependencies for the template, if we have any
+    if len(soydeps) > 0:
+        args += ["--depHeaders=%s" % ",".join(soydeps)]
+
+    ctx.actions.run(
+        inputs = inputs,
+        outputs = [o for o in ctx.outputs.outputs if "SoyInfo.java" in o.path],
+        executable = ctx.executable.infocompiler,
+        arguments = args + iargs,
+        mnemonic = "SoyInfoCompiler",
+        progress_message = "Generating %d Soy v2 Java SoyInfo file(s)" % len(
+            [o for o in ctx.outputs.outputs if "SoyInfo.java" in o.path]
+        ),
+    )
+
+    if ctx.attr.precompile:
+        jargs = [
+                "--output=%s" % jouts[0].path,
+                "--outputSrcJar=%s" % jouts[1].path]
+
+        ctx.actions.run(
+            inputs = inputs,
+            outputs = jouts,
+            executable = ctx.executable.javacompiler,
+            arguments = args + jargs,
+            mnemonic = "SoyJavaCompiler",
+            progress_message = "Generating %d Soy v2 Java bytecode JAR(s)" % len(
+                jouts
+            ),
+        )
+
+_closure_java_template_library = rule(
+    implementation = _impl,
+    output_to_genfiles = True,
+    attrs = {
+        "java_package": attr.string(),
+        "precompile": attr.bool(),
+        "srcs": attr.label_list(allow_files = SOY_FILE_TYPE),
+        "deps": attr.label_list(
+            mandatory = True,
+            providers = [SoyInfo],
+        ),
+        "proto_deps": attr.label_list(
+            mandatory = False,
+            aspects = [closure_js_aspect],
+            providers = ["closure_js_library"],
+        ),
+        "outputs": attr.output_list(),
+        "infocompiler": attr.label(cfg = "host", executable = True, mandatory = True),
+        "javacompiler": attr.label(cfg = "host", executable = True, mandatory = True),
+        "defs": attr.string_list(),
+    },
+)
+
 
 # Generates a java_library with the SoyFileInfo and SoyTemplateInfo
 # for all templates.
@@ -41,56 +152,89 @@ _SOY_LIBRARY = "@com_google_template_soy//:com_google_template_soy"
 # extra_outs: extra output files from the dependencies that are requested;
 #     useful if for generating wrappers for files that are not in the Java tree
 # allow_external_calls: Whether to allow external soy calls (i.e. calls to
-#     undefined templates). This parameter is passed to SoyParseInfoGenerator and
-#     it defaults to true.
 # soycompilerbin: Optional Soy to ParseInfo compiler target.
 def closure_java_template_library(
         name,
         java_package = None,
         srcs = [],
         deps = [],
+        java_deps = [],
+        proto_deps = [],
         filegroup_name = None,
         extra_srcs = [],
         extra_outs = [],
-        allow_external_calls = 1,
-        soycompilerbin = str(Label(_SOY_COMPILER_BIN)),
+        root_directory = None,
+        precompile = False,
+        infocompilerbin = str(Label(_SOY_INFO_COMPILER_BIN)),
+        soycompilerbin = str(Label(_SOY_JAVA_COMPILER_BIN)),
         **kwargs):
+    java_package = java_package or _soy__GetJavaPackageForCurrentDirectory(root_directory)
+
     # Strip off the .soy suffix from the file name and camel-case it, preserving
     # the case of directory names, if any.
-    outs = [
+    infoouts = [
         (_soy__dirname(fn) + _soy__camel(_soy__filename(fn)[:-4]) +
-         "SoyInfo.java")
+         "SoyInfo.java").replace("-", "")
         for fn in srcs
     ]
-    java_package = java_package or _soy__GetJavaPackageForCurrentDirectory()
 
-    # TODO(gboyer): Stop generating the info for all the dependencies.
-    # First, generate the actual AbcSoyInfo.java files.
-    _gen_soy_java_wrappers(
-        name = name + "_files",
+    if precompile:
+        jouts = [
+            (_soy__dirname(fn) + _soy__camel(_soy__filename(fn)[:-4]) + ".jar").replace("-", "")
+            for fn in srcs
+        ] + [
+            (_soy__dirname(fn) + _soy__camel(_soy__filename(fn)[:-4]) + "_src.jar").replace("-", "")
+            for fn in srcs
+        ]
+    else:
+        jouts = []
+
+    _closure_java_template_library(
+        name = name + "_soy_java",
         java_package = java_package,
         srcs = srcs + extra_srcs,
         deps = deps,
-        outs = outs + extra_outs,
-        allow_external_calls = allow_external_calls,
-        soycompilerbin = soycompilerbin,
-        **kwargs
+        proto_deps = proto_deps,
+        outputs = infoouts + jouts + extra_outs,
+        infocompiler = infocompilerbin,
+        javacompiler = soycompilerbin,
+        precompile = precompile,
     )
 
+    extra_deps = []
+    if len(proto_deps) > 0:
+        extra_deps += ["@com_google_protobuf//:protobuf_java"]
+
     # Now, wrap them in a Java library, and expose the Soy files as resources.
-    java_srcs = outs + extra_outs
-    java_library(
+    java_srcs = infoouts + extra_outs
+    _java_library(
         name = name,
         srcs = java_srcs or None,
-        exports = [str(Label(_SOY_LIBRARY))],
-        deps = [
+        exports = [
+            str(Label(_SOY_LIBRARY))],  # export Soy library
+        deps = ([
             "@com_google_guava",
             "@javax_annotation_jsr250_api",
             str(Label(_SOY_LIBRARY)),
-        ] if java_srcs else None,  # b/13630760
+        ] + java_deps + extra_deps) if java_srcs else None,  # b/13630760
         resources = srcs + extra_srcs,
         **kwargs
     )
+
+    # Create an additional import for the precompiled template JAR.
+    if precompile:
+        native.java_import(
+            name = name + "_jcompiled",
+            jars = [jouts[0]],
+            srcjar = jouts[1],
+            exports = [
+                str(Label(_SOY_LIBRARY))],  # export Soy library
+            deps = [
+                "@com_google_guava",
+                "@javax_annotation_jsr250_api",
+                str(Label(_SOY_LIBRARY)),
+            ] + java_deps + extra_deps,
+        )
 
     if filegroup_name != None:
         # Create a filegroup with all the dependencies.
@@ -99,59 +243,6 @@ def closure_java_template_library(
             srcs = srcs + extra_srcs + deps,
             **kwargs
         )
-
-# Generates SoyFileInfo and SoyTemplateInfo sources for Soy templates.
-#
-# - name: the name of a genrule which will contain Java sources
-# - java_package: name of the java package, e.g. com.google.foo.template
-# - srcs: all Soy file sources
-# - deps: Soy files to parse but not to generate outputs for
-# - outs: desired output files. for abc_def.soy, expect AbcDefSoyInfo.java
-# - allow_external_calls: Whether to allow external calls, defaults to true.
-# - soycompilerbin Optional Soy to ParseInfo compiler target.
-def _gen_soy_java_wrappers(
-        name,
-        java_package,
-        srcs,
-        deps,
-        outs,
-        allow_external_calls = 1,
-        soycompilerbin = str(Label(_SOY_COMPILER_BIN)),
-        compatible_with = None,
-        **kwargs):
-    additional_flags = ""
-    srcs_flag_file_name = name + "__srcs"
-    deps_flag_file_name = name + "__deps"
-    _soy__gen_file_list_arg_as_file(
-        out_name = srcs_flag_file_name,
-        targets = srcs,
-        flag = "--srcs",
-        compatible_with = compatible_with,
-    )
-    _soy__gen_file_list_arg_as_file(
-        out_name = deps_flag_file_name,
-        targets = deps,
-        flag = "--deps",
-        compatible_with = compatible_with,
-    )
-    native.genrule(
-        name = name,
-        tools = [soycompilerbin],
-        srcs = [srcs_flag_file_name, deps_flag_file_name] + srcs + deps,
-        message = "Generating SOY v2 Java files",
-        outs = outs,
-        cmd = "$(location %s)" % soycompilerbin +
-              " --outputDirectory=$(@D)" +
-              " --javaPackage=" + java_package +
-              " --javaClassNameSource=filename" +
-              " --allowExternalCalls=" + str(allow_external_calls) +
-              additional_flags +
-              # Include the sources and deps files as command line flags.
-              " $$(cat $(location " + srcs_flag_file_name + "))" +
-              " $$(cat $(location " + deps_flag_file_name + "))",
-        compatible_with = compatible_with,
-        **kwargs
-    )
 
 # The output file for abc_def.soy is AbcDefSoyInfo.java. Handle camelcasing
 # for both underscores and digits: css3foo_bar is Css3FooBarSoyInfo.java.
@@ -174,28 +265,13 @@ def _soy__dirname(file):
 def _soy__filename(file):
     return file[file.rfind("/") + 1:]
 
-def _soy__gen_file_list_arg_as_file(
-        out_name,
-        targets,
-        flag,
-        compatible_with = None):
-    native.genrule(
-        name = out_name + "_gen",
-        srcs = targets,
-        outs = [out_name],
-        cmd = (("if [ -n \"$(SRCS)\" ] ; " +
-                "then echo -n '%s='$$(echo \"$(SRCS)\" | sed -e 's/ /,/g') > $@ ; " +
-                "fi ; " +
-                "touch $@") % flag),  # touch the file, in case empty
-        compatible_with = compatible_with,
-        visibility = ["//visibility:private"],
-    )
-
-def _soy__GetJavaPackageForCurrentDirectory():
+def _soy__GetJavaPackageForCurrentDirectory(root_dir):
     """Returns the java package corresponding to the current directory."""
     directory = native.package_name()
-    for prefix in ("java/", "javatests/"):
+    for prefix in (root_dir or "java/", "javatests/"):
         if directory.startswith(prefix):
+            if root_dir:
+                return ".".join(directory.split("/"))
             return ".".join(directory[len(prefix):].split("/"))
         i = directory.find("/" + prefix)
         if i != -1:

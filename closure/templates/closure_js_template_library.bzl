@@ -67,7 +67,7 @@ def _impl(ctx):
         executable = ctx.executable.compiler,
         arguments = args,
         mnemonic = "SoyCompiler",
-        progress_message = "Generating %d SOY v2 JS file(s)" % len(
+        progress_message = "Generating %d Soy v2 JS file(s)" % len(
             ctx.attr.outputs,
         ),
     )

@@ -29,6 +29,11 @@ closure_proto_library(
     deps = [":person_proto"],
 )
 
+java_proto_library(
+    name = "person_proto_java",
+    deps = [":person_proto"],
+)
+
 closure_js_template_library(
     name = "greeter_soy",
     srcs = ["greeter.soy"],
@@ -169,8 +174,11 @@ closure_java_template_library(
     name = "greeter2_soy_java",
     srcs = ["greeter2.soy"],
     java_package = "io.bazel.rules.closure.soy.greeter",
-    deps = [
-        ":greeter_soy",
+    java_deps = [
+        ":person_proto_java"
+    ],
+    proto_deps = [
+        ":person_closure_proto",
     ],
 )
 
