@@ -14,9 +14,16 @@
 
 licenses(["notice"])  # Apache 2.0
 
+package(default_visibility = ["//visibility:public"])
+
 load("//closure/private:lines_sorted_test.bzl", "lines_sorted_test")
 
-exports_files(["protobuf_drop_java_7_compatibility.patch"])
+exports_files([
+    "defs.bzl",
+    "filegroup_external.bzl",
+    "protobuf_drop_java_7_compatibility.patch",
+    "repositories.bzl",
+])
 
 lines_sorted_test(
     name = "repositories_defs_sorted_test",
