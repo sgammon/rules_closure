@@ -16,22 +16,13 @@ package(default_visibility = ["//visibility:public"])
 
 licenses(["notice"])  # Apache 2.0
 
-load("@rules_java//java:defs.bzl", "java_library")
 load("@bazel_skylib//:bzl_library.bzl", "bzl_library")
 
 
 bzl_library(
-    name = "compiler-bzl",
+    name = "webfiles-bzl",
     srcs = [
-        "closure_base_js_library.bzl",
-        "closure_js_aspect.bzl",
-        "closure_js_binary.bzl",
-        "closure_js_deps.bzl",
-        "closure_js_library.bzl",
+        "web_library_external.bzl",
+        "web_library.bzl",
     ],
-)
-
-java_library(
-    name = "compiler",
-    exports = ["@com_google_javascript_closure_compiler"],
 )

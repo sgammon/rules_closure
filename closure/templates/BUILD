@@ -18,6 +18,18 @@ licenses(["notice"])  # Apache 2.0
 
 load("@rules_java//java:defs.bzl", "java_library")
 load("//closure:defs.bzl", "closure_js_library", "closure_js_proto_library")
+load("@bazel_skylib//:bzl_library.bzl", "bzl_library")
+
+
+bzl_library(
+    name = "templates-bzl",
+    srcs = [
+        "closure_java_template_library.bzl",
+        "closure_js_template_library.bzl",
+        "closure_py_template_library.bzl",
+        "closure_templates_plugin.bzl",
+    ],
+)
 
 java_library(
     name = "templates",
