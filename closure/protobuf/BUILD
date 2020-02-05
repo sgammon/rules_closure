@@ -17,6 +17,16 @@ package(default_visibility = ["//visibility:public"])
 licenses(["notice"])  # Apache 2.0
 
 load("//closure/compiler:closure_js_library.bzl", "closure_js_library")
+load("@bazel_skylib//:bzl_library.bzl", "bzl_library")
+
+
+bzl_library(
+    name = "protobuf-bzl",
+    srcs = [
+        "closure_js_proto_library.bzl",
+        "closure_proto_library.bzl",
+    ],
+)
 
 closure_js_library(
     name = "jspb",

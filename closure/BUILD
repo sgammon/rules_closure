@@ -14,7 +14,16 @@
 
 licenses(["notice"])  # Apache 2.0
 
+package(default_visibility = ["//visibility:public"])
+
 load("//closure/private:lines_sorted_test.bzl", "lines_sorted_test")
+
+
+exports_files([
+    "defs.bzl",
+    "repositories.bzl",
+    "filegroup_external.bzl",
+])
 
 lines_sorted_test(
     name = "repositories_defs_sorted_test",

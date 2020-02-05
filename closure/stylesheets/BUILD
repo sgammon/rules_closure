@@ -15,3 +15,14 @@
 package(default_visibility = ["//visibility:public"])
 
 licenses(["notice"])  # Apache 2.0
+
+load("@bazel_skylib//:bzl_library.bzl", "bzl_library")
+
+
+bzl_library(
+    name = "stylesheets-bzl",
+    srcs = [
+        "closure_css_binary.bzl",
+        "closure_css_library.bzl",
+    ],
+)
