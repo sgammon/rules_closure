@@ -40,10 +40,37 @@ def _impl(ctx):
             srcs += [dep.closure_js_library.srcs]
     srcs = depset(direct_srcs, transitive = srcs)
 
+    defs = [arg for arg in ctx.attr.defs if "--define" in arg]
+    defcount = len(defs)
+    if defcount > 0:
+        serialized_defs = ""
+        i = 0
+        for flag in defs:
+            stripped = flag.replace("--define=", "")
+            split = stripped.split("=")
+            key = split[0]
+            if "=" in stripped:
+                # there is a value
+                value = split[1].replace("'", "\'")
+            else:
+                # it's a flipped flag
+                value = "true"
+
+            # `"some_property": value`
+            serialized_defs += ("\"%s\":%s" % (key, value))
+            if i < (defcount - 1):
+                serialized_defs += ","
+            i = i + 1
+
+        def_arg = "'%s'" % serialized_defs
+    else:
+        def_arg = "no_def_overrides"
+
     args = [
         "#!/bin/sh\nexec " + ctx.executable._phantomjs.short_path,
         ctx.attr.harness.closure_js_binary.bin.short_path,
         ctx.file.html.short_path,
+        def_arg,
     ]
     args += [long_path(ctx, src) for src in srcs.to_list()]
     ctx.actions.write(
@@ -72,6 +99,7 @@ phantomjs_test = rule(
     implementation = _impl,
     attrs = {
         "deps": attr.label_list(providers = ["closure_js_library"]),
+        "defs": attr.string_list(mandatory = False),
         "runner": attr.label(providers = ["closure_js_library"]),
         "harness": attr.label(
             providers = ["closure_js_binary"],

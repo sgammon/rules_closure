@@ -258,17 +258,20 @@ function main() {
     phantom.exit(1);
   }
   var html = ['<!doctype html>', body];
+  var serializedDefines = (
+    system.args[2] !== 'no_def_overrides' ? system.args[2] : '');
   html.push('<script>\n' +
       '  // goog.require does not need to fetch sources from the local\n' +
       '  // server because everything is being loaded explicitly below\n' +
       '  var CLOSURE_NO_DEPS = true;\n' +
       '  var CLOSURE_UNCOMPILED_DEFINES = {\n' +
-      // TODO(hochhaus): Set goog.ENABLE_DEBUG_LOADER=false
-      // https://github.com/google/closure-compiler/issues/1815
-      // '    "goog.ENABLE_DEBUG_LOADER": false\n' +
+      '    "goog.ENABLE_DEBUG_LOADER": false,\n' +
+      '    "jre.logging.logLevel": "NORMAL"' + (
+            serializedDefines.length > 0 ? ',' : '') +
+      '    ' + serializedDefines +
       '  };\n' +
       '</script>\n');
-  for (var i = 2; i < system.args.length; i++) {
+  for (var i = 3; i < system.args.length; i++) {
     var js = system.args[i];
     html.push('<script src="' + RUNFILES_PREFIX + js + '"></script>\n');
   }

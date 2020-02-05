@@ -84,6 +84,7 @@ def closure_js_test(
             html = html,
             visibility = visibility,
             tags = tags,
+            defs = defs,
             **kwargs
         )
 
