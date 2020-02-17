@@ -48,9 +48,11 @@ def _impl(ctx):
         args += ["--compileTimeGlobalsFile", ctx.file.globals.path]
         inputs.append(ctx.file.globals)
     for dep in unfurl(ctx.attr.deps, provider = "closure_js_library"):
-        for f in dep.closure_js_library.descriptors.to_list():
-            args += ["--protoFileDescriptors=%s" % f.path]
-            inputs.append(f)
+        descriptors = getattr(dep.closure_js_library, "descriptors", None)
+        if descriptors != None:
+            for f in descriptors.to_list():
+                args += ["--protoFileDescriptors=%s" % f.path]
+                inputs.append(f)
 
     plugin_transitive_deps = depset(
         transitive = [m[SoyPluginInfo].generator.runtime.transitive_runtime_deps for m in ctx.attr.plugins],
