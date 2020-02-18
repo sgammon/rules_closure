@@ -274,7 +274,7 @@ def _soy__filename(file):
 def _soy__GetJavaPackageForCurrentDirectory(root_dir):
     """Returns the java package corresponding to the current directory."""
     directory = native.package_name()
-    for prefix in (root_dir or "java/", "javatests/", "src/", "app/", "samples/", "backend/"):
+    for prefix in (root_dir or "java/", "javatests/", "src/", "app/", "samples/", "backend/", "tests/"):
         if directory.startswith(prefix):
             if root_dir:
                 return ".".join(directory.split("/"))
