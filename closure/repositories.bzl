@@ -712,7 +712,6 @@ def com_google_javascript_closure_compiler():
             "    tools = [\"@bazel_tools//tools/jdk:jar\"],",
             "    cmd = \"$(location @bazel_tools//tools/jdk:jar) -xf $(location :%s) externs.zip; mv externs.zip $@\"," % jar,
             ")",
-            "",
         ]),
     )
 

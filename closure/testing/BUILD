@@ -29,6 +29,10 @@ closure_js_library(
     no_closure_library = True,
 )
 
+exports_files([
+    'karma_runner.js',
+])
+
 closure_js_library(
     name = "phantomjs_harness",
     srcs = ["phantomjs_harness.js"],

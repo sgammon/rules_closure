@@ -12,11 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-package(default_visibility = ["//closure:__subpackages__"])
+package(default_visibility = ["//visibility:public"])
 
 licenses(["notice"])  # Apache 2.0
 
 load("//closure:defs.bzl", "closure_js_library")
+
+closure_js_library(
+    name = "jasmine",
+    srcs = ["jasmine.js"],
+    no_closure_library = True,
+)
 
 closure_js_library(
     name = "phantomjs",
