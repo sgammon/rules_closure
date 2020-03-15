@@ -16,6 +16,8 @@ licenses(["notice"])  # Apache 2.0
 
 load("//closure/private:lines_sorted_test.bzl", "lines_sorted_test")
 
+exports_files(["protobuf_drop_java_7_compatibility.patch"])
+
 lines_sorted_test(
     name = "repositories_defs_sorted_test",
     cmd = "sed '1,/BEGIN_DECLARATIONS/ d' $< | grep ^def >$@",

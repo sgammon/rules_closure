@@ -739,6 +739,8 @@ def com_google_jsinterop_annotations():
     )
 
 def com_google_protobuf():
+    # TODO(davido): Remove the patching procedure when this PR is merged:
+    # https://github.com/protocolbuffers/protobuf/pull/7306
     http_archive(
         name = "com_google_protobuf",
         patches = [
