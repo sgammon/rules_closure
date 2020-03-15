@@ -741,6 +741,10 @@ def com_google_jsinterop_annotations():
 def com_google_protobuf():
     http_archive(
         name = "com_google_protobuf",
+        patches = [
+            "@io_bazel_rules_closure//closure:protobuf_drop_java_7_compatibility.patch",
+        ],
+        patch_args = ["-p1"],
         strip_prefix = "protobuf-3.11.4",
         sha256 = "a79d19dcdf9139fa4b81206e318e33d245c4c9da1ffed21c87288ed4380426f9",
         urls = [
