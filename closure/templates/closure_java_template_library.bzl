@@ -48,8 +48,8 @@ def _impl(ctx):
     protodeps = []
     for dep in ctx.attr.proto_deps:
         if dep not in protodeps:
-            for descriptor in dep.closure_js_library.descriptors.to_list():
-                if descriptor.path not in protodeps:
+            for descriptor in dep[ProtoInfo].transitive_descriptor_sets.to_list():
+                if descriptor not in protodeps:
                     protodeps.append(descriptor)
                     args += ["--protoFileDescriptors=%s" % descriptor.path]
                     inputs.append(descriptor)
@@ -120,8 +120,7 @@ _closure_java_template_library = rule(
         ),
         "proto_deps": attr.label_list(
             mandatory = False,
-            aspects = [closure_js_aspect],
-            providers = ["closure_js_library"],
+            providers = [ProtoInfo],
         ),
         "style_deps": attr.label_list(
             mandatory = False,

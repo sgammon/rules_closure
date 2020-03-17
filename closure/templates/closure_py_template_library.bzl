@@ -69,12 +69,12 @@ def _impl(ctx):
                         inputs.append(f)
 
     for protodep in ctx.attr.proto_deps:
-        for descriptor in protodep.closure_js_library.descriptors.to_list():
-            if descriptor.path not in seen_protos:
-                seen_protos.append(descriptor.path)
-                protodeps.append(descriptor)
-                inputs.append(descriptor)
-                args.add("--protoFileDescriptors=%s" % descriptor.path)
+        if protodep not in protodeps:
+            for descriptor in protodep[ProtoInfo].transitive_descriptor_sets.to_list():
+                if descriptor not in protodeps:
+                    protodeps.append(descriptor)
+                    args.add("--protoFileDescriptors=%s" % descriptor.path)
+                    inputs.append(descriptor)
 
     soydeps = []
     ## new style begins here
@@ -113,8 +113,7 @@ _closure_py_template_library = rule(
         ),
         "proto_deps": attr.label_list(
             mandatory = False,
-            aspects = [closure_js_aspect],
-            providers = ["closure_js_library"],
+            providers = [ProtoInfo],
         ),
         "outputs": attr.output_list(),
         "pycompiler": attr.label(cfg = "host", executable = True, mandatory = True),

@@ -47,6 +47,16 @@ def _impl(ctx):
     if ctx.file.globals:
         args += ["--compileTimeGlobalsFile", ctx.file.globals.path]
         inputs.append(ctx.file.globals)
+
+    protodeps = []
+    for dep in ctx.attr.proto_deps:
+        if dep not in protodeps:
+            for descriptor in dep[ProtoInfo].transitive_descriptor_sets.to_list():
+                if descriptor not in protodeps:
+                    protodeps.append(descriptor)
+                    args += ["--protoFileDescriptors=%s" % descriptor.path]
+                    inputs.append(descriptor)
+
     for dep in unfurl(ctx.attr.deps, provider = "closure_js_library"):
         descriptors = getattr(dep.closure_js_library, "descriptors", None)
         if descriptors != None:
@@ -83,6 +93,10 @@ _closure_js_template_library = rule(
             aspects = [closure_js_aspect],
             providers = ["closure_js_library"],
         ),
+        "proto_deps": attr.label_list(
+            mandatory = False,
+            providers = [ProtoInfo],
+        ),
         "outputs": attr.output_list(),
         "globals": attr.label(allow_single_file = True),
         "plugins": attr.label_list(
@@ -100,6 +114,7 @@ def closure_js_template_library(
         name,
         srcs,
         deps = [],
+        proto_deps = [],
         suppress = [],
         testonly = None,
         globals = None,
@@ -115,6 +130,7 @@ def closure_js_template_library(
         name = name + "_soy_js",
         srcs = srcs,
         deps = deps,
+        proto_deps = proto_deps,
         outputs = js_srcs,
         testonly = testonly,
         visibility = ["//visibility:private"],
