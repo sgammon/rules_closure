@@ -32,13 +32,13 @@ def _impl(ctx):
     srcs = []
     direct_srcs = []
     deps = unfurl(ctx.attr.deps, provider = "closure_js_library")
-    deps.append(ctx.attr.runner)
     for dep in deps:
         if hasattr(dep, "closure_js_binary"):
             direct_srcs += [dep.closure_js_binary.bin]
         else:
             srcs += [dep.closure_js_library.srcs]
     srcs = depset(direct_srcs, transitive = srcs)
+    deps.append(ctx.attr.runner)
 
     defs = [arg for arg in ctx.attr.defs if "--define" in arg]
     defcount = len(defs)
@@ -72,7 +72,12 @@ def _impl(ctx):
         ctx.file.html.short_path,
         def_arg,
     ]
+    if ctx.attr.debug:
+        args += ["--debug=true"]
+    args += [ctx.attr.harness.closure_js_binary.bin.short_path]
+    args += [ctx.file.html.short_path]
     args += [long_path(ctx, src) for src in srcs.to_list()]
+    args += [long_path(ctx, src) for src in ctx.attr.runner.closure_js_library.srcs.to_list()]
     ctx.actions.write(
         is_executable = True,
         output = ctx.outputs.executable,
@@ -110,6 +115,10 @@ phantomjs_test = rule(
             default = Label("//closure/testing:empty.html"),
         ),
         "data": attr.label_list(allow_files = True),
+        "debug": attr.bool(
+            doc = "Activate phantomjs debug logging",
+            default = False,
+        ),
         "_phantomjs": attr.label(
             default = Label("//third_party/phantomjs"),
             executable = True,
