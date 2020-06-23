@@ -117,10 +117,7 @@ closure_js_template_library(
 closure_js_library(
     name = "greeter_lib",
     srcs = ["greeter.js"],
-    suppress = [
-        "lintChecks",
-        "superfluousSuppress",
-    ],  # use of goog.provide
+    suppress = ["useOfGoogProvide"],
     deps = [
         ":greeter_soy",
         "//closure/library/soy",
@@ -130,10 +127,7 @@ closure_js_library(
 closure_js_library(
     name = "greeter_proto_lib",
     srcs = ["greeter_proto.js"],
-    suppress = [
-        "lintChecks",
-        "superfluousSuppress",
-    ],  # use of goog.provide
+    suppress = ["useOfGoogProvide"],
     deps = [
         ":greeter_proto_soy",
         ":person_closure_proto",
