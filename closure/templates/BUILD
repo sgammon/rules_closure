@@ -66,6 +66,7 @@ closure_js_library(
         "//closure/library/string",
         "//closure/library/string:const",
         "//closure/library/uri",
+        "//closure/protobuf:jspb",
     ],
 )
 
