@@ -17,6 +17,7 @@ closure_js_library(
         ":moduleinfo",
         ":moduleloadcallback",
         ":moduleloader",
+        ":moduleloadfailuretype",
         ":modulemanager",
     ],
 )
@@ -72,6 +73,7 @@ closure_js_library(
         "//closure/library/module",
         "//closure/library/module:basemodule",
         "//closure/library/module:moduleloadcallback",
+        "//closure/library/module:moduleloadfailuretype",
     ],
 )
 
@@ -115,6 +117,12 @@ closure_js_library(
 )
 
 closure_js_library(
+    name = "moduleloadfailuretype",
+    srcs = ["@com_google_javascript_closure_library//:closure/goog/module/moduleloadfailuretype.js"],
+    lenient = True,
+)
+
+closure_js_library(
     name = "modulemanager",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/module/modulemanager.js"],
     lenient = True,
@@ -131,6 +139,7 @@ closure_js_library(
         "//closure/library/module",
         "//closure/library/module:moduleinfo",
         "//closure/library/module:moduleloadcallback",
+        "//closure/library/module:moduleloadfailuretype",
         "//closure/library/object",
         "//third_party/closure/library/mochikit/async:deferred",
     ],

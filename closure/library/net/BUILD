@@ -11,6 +11,9 @@ closure_js_library(
     name = "all_js",
     exports = [
         ":browserchannel",
+        ":browserchannelexecutionhooks",
+        ":browserchannelserverreachability",
+        ":browserchannelstats",
         ":browsertestchannel",
         ":bulkloader",
         ":bulkloaderhelper",
@@ -63,6 +66,9 @@ closure_js_library(
         "//closure/library/json",
         "//closure/library/json:nativejsonprocessor",
         "//closure/library/log",
+        "//closure/library/net:browserchannelexecutionhooks",
+        "//closure/library/net:browserchannelserverreachability",
+        "//closure/library/net:browserchannelstats",
         "//closure/library/net:browsertestchannel",
         "//closure/library/net:channeldebug",
         "//closure/library/net:channelrequest",
@@ -77,13 +83,38 @@ closure_js_library(
 )
 
 closure_js_library(
+    name = "browserchannelexecutionhooks",
+    srcs = ["@com_google_javascript_closure_library//:closure/goog/net/browserchannelexecutionhooks.js"],
+    lenient = True,
+)
+
+closure_js_library(
+    name = "browserchannelserverreachability",
+    srcs = ["@com_google_javascript_closure_library//:closure/goog/net/browserchannelserverreachability.js"],
+    lenient = True,
+)
+
+closure_js_library(
+    name = "browserchannelstats",
+    srcs = ["@com_google_javascript_closure_library//:closure/goog/net/browserchannelstats.js"],
+    lenient = True,
+    deps = [
+        "//closure/library/events:event",
+        "//closure/library/events:eventtarget",
+    ],
+)
+
+closure_js_library(
     name = "browsertestchannel",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/net/browsertestchannel.js"],
     lenient = True,
     deps = [
         "//closure/library/json:nativejsonprocessor",
+        "//closure/library/net:browserchannelserverreachability",
+        "//closure/library/net:browserchannelstats",
         "//closure/library/net:channelrequest",
         "//closure/library/net:tmpnetwork",
+        "//closure/library/net:xhrio",
         "//closure/library/string:parser",
     ],
 )
@@ -126,11 +157,16 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/async:throttle",
+        "//closure/library/disposable",
         "//closure/library/dom:safe",
         "//closure/library/dom:tagname",
+        "//closure/library/events:event",
         "//closure/library/events:eventhandler",
         "//closure/library/html:safeurl",
         "//closure/library/html:uncheckedconversions",
+        "//closure/library/net:browserchannelexecutionhooks",
+        "//closure/library/net:browserchannelserverreachability",
+        "//closure/library/net:browserchannelstats",
         "//closure/library/net:errorcode",
         "//closure/library/net:eventtype",
         "//closure/library/net:xmlhttp",

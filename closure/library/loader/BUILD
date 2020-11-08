@@ -23,6 +23,7 @@ closure_js_library(
         "//closure/library/module:abstractmoduleloader",
         "//closure/library/module:moduleinfo",
         "//closure/library/module:moduleloadcallback",
+        "//closure/library/module:moduleloadfailuretype",
     ],
 )
 
