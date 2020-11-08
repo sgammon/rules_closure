@@ -31,9 +31,12 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/ui/emoji/emojipalette.js"],
     lenient = True,
     deps = [
+        "//closure/library/dom",
+        "//closure/library/events:event",
         "//closure/library/events:eventtype",
         "//closure/library/net:imageloader",
         "//closure/library/ui:palette",
+        "//closure/library/ui:paletterenderer",
         "//closure/library/ui/emoji",
         "//closure/library/ui/emoji:emojipaletterenderer",
     ],
@@ -46,12 +49,15 @@ closure_js_library(
     deps = [
         "//closure/library/a11y/aria",
         "//closure/library/asserts",
+        "//closure/library/dom",
         "//closure/library/dom:classlist",
         "//closure/library/dom:nodetype",
         "//closure/library/dom:tagname",
         "//closure/library/style",
+        "//closure/library/ui:palette",
         "//closure/library/ui:paletterenderer",
         "//closure/library/ui/emoji",
+        "//closure/library/ui/emoji:spriteinfo",
     ],
 )
 
@@ -60,6 +66,7 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/ui/emoji/emojipicker.js"],
     lenient = True,
     deps = [
+        "//closure/library/dom",
         "//closure/library/dom:tagname",
         "//closure/library/style",
         "//closure/library/ui:component",
@@ -76,11 +83,17 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/ui/emoji/popupemojipicker.js"],
     lenient = True,
     deps = [
+        "//closure/library/dom",
+        "//closure/library/events:browserevent",
+        "//closure/library/events:event",
         "//closure/library/events:eventtype",
         "//closure/library/positioning",
         "//closure/library/positioning:anchoredposition",
         "//closure/library/ui:component",
         "//closure/library/ui:popup",
+        "//closure/library/ui:popupbase",
+        "//closure/library/ui:tabpane",
+        "//closure/library/ui/emoji",
         "//closure/library/ui/emoji:emojipicker",
     ],
 )

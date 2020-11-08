@@ -12,7 +12,10 @@ closure_js_library(
     testonly = True,
     srcs = ["@com_google_javascript_closure_library//:closure/goog/labs/testing/assertthat.js"],
     lenient = True,
-    deps = ["//closure/library/debug:error"],
+    deps = [
+        "//closure/library/debug:error",
+        "//closure/library/labs/testing:matcher",
+    ],
 )
 
 closure_js_library(

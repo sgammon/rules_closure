@@ -37,6 +37,8 @@ closure_js_library(
         "reportUnknownTypes",
         "strictCheckTypes",
         "deprecated",
+        "stricterMissingRequire",
+        "stricterMissingRequireTypeInProvidesFile",
     ],
     deps = [
         "//closure/library/array",

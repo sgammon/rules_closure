@@ -40,5 +40,6 @@ closure_js_library(
     deps = [
         "//closure/library/disposable",
         "//closure/library/pubsub",
+        "//closure/library/pubsub:topicid",
     ],
 )

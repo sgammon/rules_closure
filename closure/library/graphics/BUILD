@@ -78,13 +78,17 @@ closure_js_library(
         "//closure/library/dom",
         "//closure/library/dom:safe",
         "//closure/library/dom:tagname",
+        "//closure/library/graphics:canvasgraphics",
+        "//closure/library/graphics:element",
         "//closure/library/graphics:ellipseelement",
+        "//closure/library/graphics:fill",
         "//closure/library/graphics:font",
         "//closure/library/graphics:groupelement",
         "//closure/library/graphics:imageelement",
         "//closure/library/graphics:path",
         "//closure/library/graphics:pathelement",
         "//closure/library/graphics:rectelement",
+        "//closure/library/graphics:stroke",
         "//closure/library/graphics:textelement",
         "//closure/library/html:safehtml",
         "//closure/library/html:uncheckedconversions",
@@ -99,12 +103,25 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/graphics/canvasgraphics.js"],
     lenient = True,
     deps = [
+        "//closure/library/dom",
         "//closure/library/dom:tagname",
         "//closure/library/events:eventtype",
         "//closure/library/graphics:abstractgraphics",
+        "//closure/library/graphics:affinetransform",
         "//closure/library/graphics:canvaselement",
+        "//closure/library/graphics:element",
+        "//closure/library/graphics:ellipseelement",
+        "//closure/library/graphics:fill",
         "//closure/library/graphics:font",
+        "//closure/library/graphics:groupelement",
+        "//closure/library/graphics:imageelement",
+        "//closure/library/graphics:path",
+        "//closure/library/graphics:pathelement",
+        "//closure/library/graphics:rectelement",
         "//closure/library/graphics:solidfill",
+        "//closure/library/graphics:stroke",
+        "//closure/library/graphics:strokeandfillelement",
+        "//closure/library/graphics:textelement",
         "//closure/library/math:size",
         "//closure/library/style",
     ],
@@ -119,6 +136,7 @@ closure_js_library(
         "//closure/library/events",
         "//closure/library/events:eventtarget",
         "//closure/library/events:listenable",
+        "//closure/library/graphics:abstractgraphics",
         "//closure/library/graphics:affinetransform",
         "//closure/library/math",
     ],
@@ -128,7 +146,12 @@ closure_js_library(
     name = "ellipseelement",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/graphics/ellipseelement.js"],
     lenient = True,
-    deps = ["//closure/library/graphics:strokeandfillelement"],
+    deps = [
+        "//closure/library/graphics:abstractgraphics",
+        "//closure/library/graphics:fill",
+        "//closure/library/graphics:stroke",
+        "//closure/library/graphics:strokeandfillelement",
+    ],
 )
 
 closure_js_library(
@@ -149,6 +172,7 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/dom",
+        "//closure/library/graphics:abstractgraphics",
         "//closure/library/graphics:canvasgraphics",
         "//closure/library/graphics:svggraphics",
         "//closure/library/graphics:vmlgraphics",
@@ -160,14 +184,20 @@ closure_js_library(
     name = "groupelement",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/graphics/groupelement.js"],
     lenient = True,
-    deps = ["//closure/library/graphics:element"],
+    deps = [
+        "//closure/library/graphics:abstractgraphics",
+        "//closure/library/graphics:element",
+    ],
 )
 
 closure_js_library(
     name = "imageelement",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/graphics/imageelement.js"],
     lenient = True,
-    deps = ["//closure/library/graphics:element"],
+    deps = [
+        "//closure/library/graphics:abstractgraphics",
+        "//closure/library/graphics:element",
+    ],
 )
 
 closure_js_library(
@@ -195,7 +225,13 @@ closure_js_library(
     name = "pathelement",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/graphics/pathelement.js"],
     lenient = True,
-    deps = ["//closure/library/graphics:strokeandfillelement"],
+    deps = [
+        "//closure/library/graphics:abstractgraphics",
+        "//closure/library/graphics:fill",
+        "//closure/library/graphics:path",
+        "//closure/library/graphics:stroke",
+        "//closure/library/graphics:strokeandfillelement",
+    ],
 )
 
 closure_js_library(
@@ -212,7 +248,12 @@ closure_js_library(
     name = "rectelement",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/graphics/rectelement.js"],
     lenient = True,
-    deps = ["//closure/library/graphics:strokeandfillelement"],
+    deps = [
+        "//closure/library/graphics:abstractgraphics",
+        "//closure/library/graphics:fill",
+        "//closure/library/graphics:stroke",
+        "//closure/library/graphics:strokeandfillelement",
+    ],
 )
 
 closure_js_library(
@@ -232,7 +273,12 @@ closure_js_library(
     name = "strokeandfillelement",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/graphics/strokeandfillelement.js"],
     lenient = True,
-    deps = ["//closure/library/graphics:element"],
+    deps = [
+        "//closure/library/graphics:abstractgraphics",
+        "//closure/library/graphics:element",
+        "//closure/library/graphics:fill",
+        "//closure/library/graphics:stroke",
+    ],
 )
 
 closure_js_library(
@@ -242,10 +288,14 @@ closure_js_library(
     deps = [
         "//closure/library/dom",
         "//closure/library/graphics:ellipseelement",
+        "//closure/library/graphics:fill",
         "//closure/library/graphics:groupelement",
         "//closure/library/graphics:imageelement",
+        "//closure/library/graphics:path",
         "//closure/library/graphics:pathelement",
         "//closure/library/graphics:rectelement",
+        "//closure/library/graphics:stroke",
+        "//closure/library/graphics:svggraphics",
         "//closure/library/graphics:textelement",
     ],
 )
@@ -259,12 +309,22 @@ closure_js_library(
         "//closure/library/events:eventhandler",
         "//closure/library/events:eventtype",
         "//closure/library/graphics:abstractgraphics",
+        "//closure/library/graphics:affinetransform",
+        "//closure/library/graphics:element",
+        "//closure/library/graphics:ellipseelement",
+        "//closure/library/graphics:fill",
         "//closure/library/graphics:font",
+        "//closure/library/graphics:groupelement",
+        "//closure/library/graphics:imageelement",
         "//closure/library/graphics:lineargradient",
         "//closure/library/graphics:path",
+        "//closure/library/graphics:pathelement",
+        "//closure/library/graphics:rectelement",
         "//closure/library/graphics:solidfill",
         "//closure/library/graphics:stroke",
+        "//closure/library/graphics:strokeandfillelement",
         "//closure/library/graphics:svgelement",
+        "//closure/library/graphics:textelement",
         "//closure/library/math",
         "//closure/library/math:size",
         "//closure/library/style",
@@ -277,7 +337,12 @@ closure_js_library(
     name = "textelement",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/graphics/textelement.js"],
     lenient = True,
-    deps = ["//closure/library/graphics:strokeandfillelement"],
+    deps = [
+        "//closure/library/graphics:abstractgraphics",
+        "//closure/library/graphics:fill",
+        "//closure/library/graphics:stroke",
+        "//closure/library/graphics:strokeandfillelement",
+    ],
 )
 
 closure_js_library(
@@ -301,16 +366,29 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/array",
+        "//closure/library/dom",
         "//closure/library/dom:safe",
         "//closure/library/dom:tagname",
         "//closure/library/events",
+        "//closure/library/events:browserevent",
         "//closure/library/events:eventhandler",
         "//closure/library/events:eventtype",
         "//closure/library/graphics:abstractgraphics",
+        "//closure/library/graphics:affinetransform",
+        "//closure/library/graphics:element",
+        "//closure/library/graphics:ellipseelement",
+        "//closure/library/graphics:fill",
         "//closure/library/graphics:font",
+        "//closure/library/graphics:groupelement",
+        "//closure/library/graphics:imageelement",
         "//closure/library/graphics:lineargradient",
         "//closure/library/graphics:path",
+        "//closure/library/graphics:pathelement",
+        "//closure/library/graphics:rectelement",
         "//closure/library/graphics:solidfill",
+        "//closure/library/graphics:stroke",
+        "//closure/library/graphics:strokeandfillelement",
+        "//closure/library/graphics:textelement",
         "//closure/library/graphics:vmlelement",
         "//closure/library/html:uncheckedconversions",
         "//closure/library/math",

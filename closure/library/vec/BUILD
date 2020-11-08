@@ -122,7 +122,10 @@ closure_js_library(
     name = "ray",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/vec/ray.js"],
     lenient = True,
-    deps = ["//closure/library/vec:vec3"],
+    deps = [
+        "//closure/library/vec",
+        "//closure/library/vec:vec3",
+    ],
 )
 
 closure_js_library(

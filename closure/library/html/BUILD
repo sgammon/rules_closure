@@ -46,6 +46,8 @@ closure_js_library(
     deps = [
         "//closure/library/asserts",
         "//closure/library/html:safehtml",
+        "//closure/library/html:trustedresourceurl",
+        "//closure/library/string:typedstring",
     ],
 )
 
@@ -179,6 +181,7 @@ closure_js_library(
         "//closure/library/html:safestylesheet",
         "//closure/library/html:safeurl",
         "//closure/library/html:trustedresourceurl",
+        "//closure/library/i18n:bidi",
         "//closure/library/testing:mockmatchers",
     ],
 )
@@ -230,6 +233,7 @@ closure_js_library(
         "//closure/library/html:safestylesheet",
         "//closure/library/html:safeurl",
         "//closure/library/html:trustedresourceurl",
+        "//closure/library/i18n:bidi",
         "//closure/library/string:const",
         "//closure/library/string:internal",
     ],

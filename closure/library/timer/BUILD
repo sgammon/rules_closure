@@ -19,5 +19,6 @@ closure_js_library(
     deps = [
         "//closure/library/events:eventtarget",
         "//closure/library/promise",
+        "//closure/library/promise:thenable",
     ],
 )

@@ -29,6 +29,12 @@ closure_js_library(
     name = "channel",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/labs/net/webchannel/channel.js"],
     lenient = True,
+    deps = [
+        "//closure/library/labs/net/webchannel:channelrequest",
+        "//closure/library/labs/net/webchannel:connectionstate",
+        "//closure/library/net:xhrio",
+        "//closure/library/uri",
+    ],
 )
 
 closure_js_library(
@@ -39,18 +45,22 @@ closure_js_library(
         "//closure/library/asserts",
         "//closure/library/async:throttle",
         "//closure/library/disposable",
+        "//closure/library/events:event",
         "//closure/library/events:eventhandler",
         "//closure/library/labs/net:webchannel",
         "//closure/library/labs/net/webchannel:channel",
         "//closure/library/labs/net/webchannel:environment",
         "//closure/library/labs/net/webchannel:requeststats",
         "//closure/library/labs/net/webchannel:webchanneldebug",
+        "//closure/library/labs/net/webchannel:wire",
         "//closure/library/net:errorcode",
         "//closure/library/net:eventtype",
+        "//closure/library/net:xhrio",
         "//closure/library/net:xmlhttp",
         "//closure/library/object",
         "//closure/library/string",
         "//closure/library/timer",
+        "//closure/library/uri",
         "//closure/library/useragent",
     ],
 )
@@ -125,6 +135,7 @@ closure_js_library(
         "//closure/library/object",
         "//closure/library/string",
         "//closure/library/structs",
+        "//closure/library/structs:map",
         "//closure/library/uri",
     ],
 )
@@ -153,8 +164,11 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/labs/net/webchannel/webchanneldebug.js"],
     lenient = True,
     deps = [
+        "//closure/library/debug:logger",
         "//closure/library/json",
         "//closure/library/log",
+        "//closure/library/net:xmlhttp",
+        "//closure/library/uri",
     ],
 )
 
@@ -162,6 +176,7 @@ closure_js_library(
     name = "wire",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/labs/net/webchannel/wire.js"],
     lenient = True,
+    deps = ["//closure/library/structs:map"],
 )
 
 closure_js_library(
@@ -173,6 +188,8 @@ closure_js_library(
         "//closure/library/json",
         "//closure/library/json:nativejsonprocessor",
         "//closure/library/labs/net/webchannel:wire",
+        "//closure/library/string:parser",
         "//closure/library/structs",
+        "//closure/library/structs:map",
     ],
 )

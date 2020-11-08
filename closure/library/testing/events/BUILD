@@ -15,6 +15,7 @@ closure_js_library(
     deps = [
         "//closure/library/array",
         "//closure/library/events:event",
+        "//closure/library/events:eventid",
     ],
 )
 
@@ -33,6 +34,7 @@ closure_js_library(
         "//closure/library/events:eventtarget",
         "//closure/library/events:eventtype",
         "//closure/library/events:keycodes",
+        "//closure/library/math:coordinate",
         "//closure/library/object",
         "//closure/library/style",
         "//closure/library/useragent",

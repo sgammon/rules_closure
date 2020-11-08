@@ -23,5 +23,6 @@ closure_js_library(
         "//closure/library/storage:collectablestorage",
         "//closure/library/storage:errorcode",
         "//closure/library/storage:expiringstorage",
+        "//closure/library/storage/mechanism:iterablemechanism",
     ],
 )

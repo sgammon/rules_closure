@@ -36,6 +36,11 @@ closure_js_library(
     name = "entry",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/fs/entry.js"],
     lenient = True,
+    deps = [
+        "//closure/library/fs:filesystem",
+        "//closure/library/fs:filewriter",
+        "//third_party/closure/library/mochikit/async:deferred",
+    ],
 )
 
 closure_js_library(
@@ -46,6 +51,7 @@ closure_js_library(
         "//closure/library/array",
         "//closure/library/fs:entry",
         "//closure/library/fs:error",
+        "//closure/library/fs:filesystem",
         "//closure/library/fs:filewriter",
         "//closure/library/functions",
         "//closure/library/string",
@@ -92,6 +98,7 @@ closure_js_library(
     name = "filesystem",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/fs/filesystem.js"],
     lenient = True,
+    deps = ["//closure/library/fs:entry"],
 )
 
 closure_js_library(

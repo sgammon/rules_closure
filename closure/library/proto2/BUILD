@@ -30,6 +30,8 @@ closure_js_library(
         "//closure/library/array",
         "//closure/library/asserts",
         "//closure/library/object",
+        "//closure/library/proto2:fielddescriptor",
+        "//closure/library/proto2:message",
         "//closure/library/string",
     ],
 )
@@ -40,6 +42,8 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/asserts",
+        "//closure/library/proto2:descriptor",
+        "//closure/library/proto2:message",
         "//closure/library/string",
     ],
 )
@@ -50,6 +54,7 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/asserts",
+        "//closure/library/proto2:fielddescriptor",
         "//closure/library/proto2:message",
         "//closure/library/proto2:serializer",
     ],
@@ -63,6 +68,7 @@ closure_js_library(
         "//closure/library/asserts",
         "//closure/library/proto2:descriptor",
         "//closure/library/proto2:fielddescriptor",
+        "//closure/library/proto2:lazydeserializer",
     ],
 )
 
@@ -73,6 +79,7 @@ closure_js_library(
     deps = [
         "//closure/library/asserts",
         "//closure/library/proto2:fielddescriptor",
+        "//closure/library/proto2:message",
         "//closure/library/proto2:serializer",
         "//closure/library/string",
     ],
@@ -86,6 +93,7 @@ closure_js_library(
         "//closure/library/asserts",
         "//closure/library/proto2:fielddescriptor",
         "//closure/library/proto2:lazydeserializer",
+        "//closure/library/proto2:message",
         "//closure/library/proto2:serializer",
     ],
 )
@@ -96,6 +104,7 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/asserts",
+        "//closure/library/proto2:descriptor",
         "//closure/library/proto2:fielddescriptor",
         "//closure/library/proto2:message",
     ],
@@ -106,7 +115,10 @@ closure_js_library(
     testonly = True,
     srcs = ["@com_google_javascript_closure_library//:closure/goog/proto2/test.pb.js"],
     lenient = True,
-    deps = ["//closure/library/proto2:message"],
+    deps = [
+        "//closure/library/proto2:descriptor",
+        "//closure/library/proto2:message",
+    ],
 )
 
 closure_js_library(

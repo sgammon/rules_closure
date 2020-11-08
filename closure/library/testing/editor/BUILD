@@ -29,6 +29,7 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/dom",
+        "//closure/library/dom:abstractrange",
         "//closure/library/dom:range",
         "//closure/library/editor:field",
         "//closure/library/testing:loosemock",
@@ -44,6 +45,7 @@ closure_js_library(
     deps = [
         "//closure/library/disposable",
         "//closure/library/dom",
+        "//closure/library/dom:abstractrange",
         "//closure/library/dom:range",
         "//closure/library/editor:browserfeature",
         "//closure/library/editor:node",

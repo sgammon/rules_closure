@@ -83,6 +83,7 @@ closure_js_library(
         "//closure/library/style",
         "//closure/library/tweak",
         "//closure/library/tweak:entries",
+        "//closure/library/tweak:registry",
         "//closure/library/ui:zippy",
         "//closure/library/useragent",
     ],

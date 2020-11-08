@@ -54,6 +54,7 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/date/relative.js"],
     lenient = True,
     deps = [
+        "//closure/library/date",
         "//closure/library/i18n:datetimeformat",
         "//closure/library/i18n:datetimepatterns",
         "//closure/library/i18n:relativedatetimeformat",

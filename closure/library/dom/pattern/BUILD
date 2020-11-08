@@ -42,6 +42,7 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/dom/pattern/allchildren.js"],
     lenient = True,
     deps = [
+        "//closure/library/dom:tagiterator",
         "//closure/library/dom/pattern",
         "//closure/library/dom/pattern:abstractpattern",
     ],
@@ -52,7 +53,9 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/dom/pattern/childmatches.js"],
     lenient = True,
     deps = [
+        "//closure/library/dom:tagiterator",
         "//closure/library/dom/pattern",
+        "//closure/library/dom/pattern:abstractpattern",
         "//closure/library/dom/pattern:allchildren",
     ],
 )
@@ -72,6 +75,7 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/dom/pattern/fulltag.js"],
     lenient = True,
     deps = [
+        "//closure/library/dom:tagiterator",
         "//closure/library/dom/pattern",
         "//closure/library/dom/pattern:starttag",
         "//closure/library/dom/pattern:tag",
@@ -94,6 +98,8 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/dom/pattern/nodetype.js"],
     lenient = True,
     deps = [
+        "//closure/library/dom:nodetype",
+        "//closure/library/dom:tagiterator",
         "//closure/library/dom/pattern",
         "//closure/library/dom/pattern:abstractpattern",
     ],
@@ -111,6 +117,7 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/dom:nodetype",
+        "//closure/library/dom:tagiterator",
         "//closure/library/dom/pattern",
         "//closure/library/dom/pattern:abstractpattern",
     ],
@@ -122,6 +129,7 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/dom:nodetype",
+        "//closure/library/dom:tagiterator",
         "//closure/library/dom/pattern",
         "//closure/library/dom/pattern:abstractpattern",
     ],
@@ -142,6 +150,7 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/dom/pattern/tag.js"],
     lenient = True,
     deps = [
+        "//closure/library/dom:tagiterator",
         "//closure/library/dom/pattern",
         "//closure/library/dom/pattern:abstractpattern",
         "//closure/library/object",
@@ -154,6 +163,7 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/dom:nodetype",
+        "//closure/library/dom:tagiterator",
         "//closure/library/dom/pattern",
         "//closure/library/dom/pattern:abstractpattern",
     ],

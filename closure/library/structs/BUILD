@@ -142,6 +142,7 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/structs/set.js"],
     lenient = True,
     deps = [
+        "//closure/library/iter",
         "//closure/library/structs",
         "//closure/library/structs:collection",
         "//closure/library/structs:map",

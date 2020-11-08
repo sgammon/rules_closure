@@ -59,6 +59,7 @@ closure_js_library(
     deps = [
         "//closure/library/disposable",
         "//closure/library/messaging:messagechannel",
+        "//third_party/closure/library/mochikit/async:deferred",
     ],
 )
 
@@ -69,7 +70,9 @@ closure_js_library(
     deps = [
         "//closure/library/debug",
         "//closure/library/debug:logger",
+        "//closure/library/debug:logrecord",
         "//closure/library/disposable",
+        "//closure/library/messaging:messagechannel",
     ],
 )
 
@@ -80,6 +83,7 @@ closure_js_library(
     deps = [
         "//closure/library/disposable",
         "//closure/library/log",
+        "//closure/library/messaging:messagechannel",
     ],
 )
 
@@ -93,6 +97,7 @@ closure_js_library(
     name = "messaging",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/messaging/messaging.js"],
     lenient = True,
+    deps = ["//closure/library/messaging:messagechannel"],
 )
 
 closure_js_library(
@@ -114,6 +119,7 @@ closure_js_library(
     deps = [
         "//closure/library/disposable",
         "//closure/library/messaging:deferredchannel",
+        "//closure/library/messaging:messagechannel",
         "//closure/library/messaging:portchannel",
         "//closure/library/messaging:portnetwork",
         "//closure/library/object",
@@ -130,11 +136,13 @@ closure_js_library(
         "//closure/library/debug",
         "//closure/library/disposable",
         "//closure/library/events",
+        "//closure/library/events:event",
         "//closure/library/events:eventtype",
         "//closure/library/json",
         "//closure/library/log",
         "//closure/library/messaging:abstractchannel",
         "//closure/library/messaging:deferredchannel",
+        "//closure/library/messaging:messagechannel",
         "//closure/library/object",
         "//closure/library/string",
         "//closure/library/timer",
@@ -147,6 +155,7 @@ closure_js_library(
     name = "portnetwork",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/messaging/portnetwork.js"],
     lenient = True,
+    deps = ["//closure/library/messaging:messagechannel"],
 )
 
 closure_js_library(
@@ -157,6 +166,7 @@ closure_js_library(
         "//closure/library/asserts",
         "//closure/library/disposable",
         "//closure/library/log",
+        "//closure/library/messaging:messagechannel",
         "//closure/library/messaging:portchannel",
         "//closure/library/messaging:portnetwork",
         "//closure/library/object",
@@ -170,6 +180,7 @@ closure_js_library(
     deps = [
         "//closure/library/disposable",
         "//closure/library/log",
+        "//closure/library/messaging:messagechannel",
         "//closure/library/messaging:multichannel",
         "//closure/library/promise",
     ],

@@ -76,8 +76,10 @@ closure_js_library(
         "//closure/library/net:xhrio",
         "//closure/library/object",
         "//closure/library/string",
+        "//closure/library/string:parser",
         "//closure/library/structs",
         "//closure/library/structs:circularbuffer",
+        "//closure/library/structs:map",
         "//closure/library/uri",
     ],
 )
@@ -110,8 +112,10 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/json:nativejsonprocessor",
+        "//closure/library/net:browserchannel",
         "//closure/library/net:browserchannelserverreachability",
         "//closure/library/net:browserchannelstats",
+        "//closure/library/net:channeldebug",
         "//closure/library/net:channelrequest",
         "//closure/library/net:tmpnetwork",
         "//closure/library/net:xhrio",
@@ -131,6 +135,7 @@ closure_js_library(
         "//closure/library/net:bulkloaderhelper",
         "//closure/library/net:eventtype",
         "//closure/library/net:xhrio",
+        "//closure/library/uri",
     ],
 )
 
@@ -138,7 +143,10 @@ closure_js_library(
     name = "bulkloaderhelper",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/net/bulkloaderhelper.js"],
     lenient = True,
-    deps = ["//closure/library/disposable"],
+    deps = [
+        "//closure/library/disposable",
+        "//closure/library/uri",
+    ],
 )
 
 closure_js_library(
@@ -148,6 +156,8 @@ closure_js_library(
     deps = [
         "//closure/library/json",
         "//closure/library/log",
+        "//closure/library/net:xmlhttp",
+        "//closure/library/uri",
     ],
 )
 
@@ -164,16 +174,21 @@ closure_js_library(
         "//closure/library/events:eventhandler",
         "//closure/library/html:safeurl",
         "//closure/library/html:uncheckedconversions",
+        "//closure/library/net:browserchannel",
         "//closure/library/net:browserchannelexecutionhooks",
         "//closure/library/net:browserchannelserverreachability",
         "//closure/library/net:browserchannelstats",
+        "//closure/library/net:browsertestchannel",
+        "//closure/library/net:channeldebug",
         "//closure/library/net:errorcode",
         "//closure/library/net:eventtype",
+        "//closure/library/net:xhrio",
         "//closure/library/net:xmlhttp",
         "//closure/library/object",
         "//closure/library/string",
         "//closure/library/string:const",
         "//closure/library/timer",
+        "//closure/library/uri",
         "//closure/library/useragent",
     ],
 )
@@ -260,6 +275,8 @@ closure_js_library(
         "//closure/library/fs:entry",
         "//closure/library/fs:error",
         "//closure/library/fs:filesaver",
+        "//closure/library/fs:filewriter",
+        "//closure/library/net:errorcode",
         "//closure/library/net:eventtype",
         "//closure/library/net:xhrio",
         "//closure/library/net:xhriopool",
@@ -293,10 +310,12 @@ closure_js_library(
         "//closure/library/dom:safe",
         "//closure/library/dom:tagname",
         "//closure/library/events",
+        "//closure/library/events:browserevent",
         "//closure/library/events:event",
         "//closure/library/events:eventtarget",
         "//closure/library/events:eventtype",
         "//closure/library/html:legacyconversions",
+        "//closure/library/html:safehtml",
         "//closure/library/html:safeurl",
         "//closure/library/html:uncheckedconversions",
         "//closure/library/json",
@@ -307,6 +326,7 @@ closure_js_library(
         "//closure/library/string",
         "//closure/library/string:const",
         "//closure/library/structs",
+        "//closure/library/structs:map",
         "//closure/library/timer",
         "//closure/library/uri",
         "//closure/library/useragent",
@@ -335,6 +355,7 @@ closure_js_library(
         "//closure/library/disposable",
         "//closure/library/dom",
         "//closure/library/dom:tagname",
+        "//closure/library/events:event",
         "//closure/library/events:eventhandler",
         "//closure/library/events:eventtarget",
         "//closure/library/events:eventtype",
@@ -392,6 +413,9 @@ closure_js_library(
         "//closure/library/net:errorcode",
         "//closure/library/net:eventtype",
         "//closure/library/net:iframeio",
+        "//closure/library/structs:map",
+        "//closure/library/testing:testqueue",
+        "//closure/library/uri",
     ],
 )
 
@@ -401,6 +425,7 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/events",
+        "//closure/library/events:event",
         "//closure/library/net:iframeloadmonitor",
     ],
 )
@@ -442,6 +467,7 @@ closure_js_library(
     deps = [
         "//closure/library/asserts",
         "//closure/library/debug:entrypointregistry",
+        "//closure/library/debug:errorhandler",
         "//closure/library/events",
         "//closure/library/events:event",
         "//closure/library/events:eventtarget",
@@ -468,18 +494,22 @@ closure_js_library(
         "//closure/library/array",
         "//closure/library/asserts",
         "//closure/library/debug:entrypointregistry",
+        "//closure/library/debug:errorhandler",
         "//closure/library/events:eventtarget",
         "//closure/library/json:hybrid",
         "//closure/library/log",
         "//closure/library/net:errorcode",
         "//closure/library/net:eventtype",
         "//closure/library/net:httpstatus",
+        "//closure/library/net:xhrlike",
         "//closure/library/net:xmlhttp",
+        "//closure/library/net:xmlhttpfactory",
         "//closure/library/object",
         "//closure/library/string",
         "//closure/library/structs",
         "//closure/library/structs:map",
         "//closure/library/timer",
+        "//closure/library/uri",
         "//closure/library/uri:utils",
         "//closure/library/useragent",
     ],
@@ -491,6 +521,7 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/net:xhrio",
+        "//closure/library/structs:map",
         "//closure/library/structs:prioritypool",
     ],
 )
@@ -525,6 +556,7 @@ closure_js_library(
     deps = [
         "//closure/library/asserts",
         "//closure/library/net:wrapperxmlhttpfactory",
+        "//closure/library/net:xhrlike",
         "//closure/library/net:xmlhttpfactory",
     ],
 )

@@ -51,13 +51,17 @@ closure_js_library(
     name = "webchanneltransport",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/labs/net/webchanneltransport.js"],
     lenient = True,
+    deps = ["//closure/library/labs/net:webchannel"],
 )
 
 closure_js_library(
     name = "webchanneltransportfactory",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/labs/net/webchanneltransportfactory.js"],
     lenient = True,
-    deps = ["//closure/library/labs/net/webchannel:webchannelbasetransport"],
+    deps = [
+        "//closure/library/labs/net:webchanneltransport",
+        "//closure/library/labs/net/webchannel:webchannelbasetransport",
+    ],
 )
 
 closure_js_library(
@@ -68,7 +72,9 @@ closure_js_library(
         "//closure/library/asserts",
         "//closure/library/debug:error",
         "//closure/library/net:httpstatus",
+        "//closure/library/net:xhrlike",
         "//closure/library/net:xmlhttp",
+        "//closure/library/net:xmlhttpfactory",
         "//closure/library/object",
         "//closure/library/promise",
         "//closure/library/string",

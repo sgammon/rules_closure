@@ -25,6 +25,7 @@ closure_js_library(
         "//closure/library/labs/useragent:platform",
         "//closure/library/string",
         "//closure/library/string:const",
+        "//closure/library/string:typedstring",
         "//closure/library/useragent",
     ],
 )

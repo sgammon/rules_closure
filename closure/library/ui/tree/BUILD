@@ -25,7 +25,9 @@ closure_js_library(
         "//closure/library/a11y/aria",
         "//closure/library/a11y/aria:attributes",
         "//closure/library/asserts",
+        "//closure/library/dom",
         "//closure/library/dom:safe",
+        "//closure/library/events:browserevent",
         "//closure/library/events:event",
         "//closure/library/events:keycodes",
         "//closure/library/html:safehtml",
@@ -45,7 +47,9 @@ closure_js_library(
     deps = [
         "//closure/library/a11y/aria",
         "//closure/library/asserts",
+        "//closure/library/dom",
         "//closure/library/dom:classlist",
+        "//closure/library/events:browserevent",
         "//closure/library/events:eventtype",
         "//closure/library/events:focushandler",
         "//closure/library/events:keyhandler",
@@ -62,7 +66,11 @@ closure_js_library(
     name = "treenode",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/ui/tree/treenode.js"],
     lenient = True,
-    deps = ["//closure/library/ui/tree:basenode"],
+    deps = [
+        "//closure/library/dom",
+        "//closure/library/html:safehtml",
+        "//closure/library/ui/tree:basenode",
+    ],
 )
 
 closure_js_library(
@@ -71,8 +79,10 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/array",
+        "//closure/library/events:browserevent",
         "//closure/library/events:keycodes",
         "//closure/library/string",
         "//closure/library/structs:trie",
+        "//closure/library/ui/tree:basenode",
     ],
 )

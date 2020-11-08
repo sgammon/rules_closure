@@ -42,6 +42,7 @@ closure_js_library(
     name = "resolver",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/promise/resolver.js"],
     lenient = True,
+    deps = ["//closure/library/promise"],
 )
 
 closure_js_library(
@@ -56,4 +57,5 @@ closure_js_library(
     name = "thenable",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/promise/thenable.js"],
     lenient = True,
+    deps = ["//closure/library/promise"],
 )

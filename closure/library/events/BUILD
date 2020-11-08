@@ -108,6 +108,10 @@ closure_js_library(
     deps = [
         "//closure/library/disposable",
         "//closure/library/events",
+        "//closure/library/events:event",
+        "//closure/library/events:eventid",
+        "//closure/library/events:eventtarget",
+        "//closure/library/events:eventwrapper",
         "//closure/library/object",
     ],
 )
@@ -125,9 +129,14 @@ closure_js_library(
     deps = [
         "//closure/library/asserts",
         "//closure/library/debug:entrypointregistry",
+        "//closure/library/debug:errorhandler",
         "//closure/library/events:browserevent",
         "//closure/library/events:browserfeature",
+        "//closure/library/events:event",
+        "//closure/library/events:eventid",
+        "//closure/library/events:eventwrapper",
         "//closure/library/events:listenable",
+        "//closure/library/events:listener",
         "//closure/library/events:listenermap",
     ],
 )
@@ -141,6 +150,7 @@ closure_js_library(
         "//closure/library/disposable",
         "//closure/library/events",
         "//closure/library/events:event",
+        "//closure/library/events:eventid",
         "//closure/library/events:listenable",
         "//closure/library/events:listenermap",
         "//closure/library/object",
@@ -176,6 +186,10 @@ closure_js_library(
     name = "eventwrapper",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/events/eventwrapper.js"],
     lenient = True,
+    deps = [
+        "//closure/library/events",
+        "//closure/library/events:eventhandler",
+    ],
 )
 
 closure_js_library(
@@ -210,6 +224,7 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/events/imehandler.js"],
     lenient = True,
     deps = [
+        "//closure/library/events:browserevent",
         "//closure/library/events:event",
         "//closure/library/events:eventhandler",
         "//closure/library/events:eventtarget",
@@ -238,7 +253,10 @@ closure_js_library(
     name = "keycodes",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/events/keycodes.js"],
     lenient = True,
-    deps = ["//closure/library/useragent"],
+    deps = [
+        "//closure/library/events:browserevent",
+        "//closure/library/useragent",
+    ],
 )
 
 closure_js_library(
@@ -271,7 +289,10 @@ closure_js_library(
     name = "listenable",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/events/listenable.js"],
     lenient = True,
-    deps = ["//closure/library/events:eventid"],
+    deps = [
+        "//closure/library/events:event",
+        "//closure/library/events:eventid",
+    ],
 )
 
 closure_js_library(
@@ -287,6 +308,8 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/array",
+        "//closure/library/events:eventid",
+        "//closure/library/events:listenable",
         "//closure/library/events:listener",
         "//closure/library/object",
     ],
@@ -355,6 +378,7 @@ closure_js_library(
     deps = [
         "//closure/library/dom",
         "//closure/library/events",
+        "//closure/library/events:browserevent",
         "//closure/library/events:eventtarget",
         "//closure/library/events:wheelevent",
         "//closure/library/style",

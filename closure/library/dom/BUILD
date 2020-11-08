@@ -75,7 +75,9 @@ closure_js_library(
     deps = [
         "//closure/library/dom",
         "//closure/library/dom:nodetype",
+        "//closure/library/dom:savedrange",
         "//closure/library/dom:tagiterator",
+        "//closure/library/math:coordinate",
         "//closure/library/useragent",
     ],
 )
@@ -123,9 +125,11 @@ closure_js_library(
     deps = [
         "//closure/library/asserts",
         "//closure/library/async:delay",
+        "//closure/library/dom",
         "//closure/library/events",
         "//closure/library/events:eventtarget",
         "//closure/library/events:eventtype",
+        "//closure/library/math:size",
     ],
 )
 
@@ -212,6 +216,7 @@ closure_js_library(
         "//closure/library/dom",
         "//closure/library/dom:tagname",
         "//closure/library/events",
+        "//closure/library/events:browserevent",
         "//closure/library/events:eventtarget",
         "//closure/library/events:eventtype",
         "//closure/library/useragent",
@@ -360,6 +365,7 @@ closure_js_library(
     deps = [
         "//closure/library/array",
         "//closure/library/dom",
+        "//closure/library/dom:abstractrange",
         "//closure/library/dom:savedrange",
         "//closure/library/dom:tagname",
         "//closure/library/string",
@@ -372,6 +378,7 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/disposable",
+        "//closure/library/dom:abstractrange",
         "//closure/library/log",
     ],
 )
@@ -436,6 +443,7 @@ closure_js_library(
         "//closure/library/dom:tagname",
         "//closure/library/dom:textrangeiterator",
         "//closure/library/dom/browserrange",
+        "//closure/library/dom/browserrange:abstractrange",
         "//closure/library/useragent",
     ],
 )
@@ -485,6 +493,7 @@ closure_js_library(
         "//closure/library/disposable",
         "//closure/library/dom",
         "//closure/library/events",
+        "//closure/library/events:event",
         "//closure/library/events:eventtarget",
         "//closure/library/events:eventtype",
         "//closure/library/math:size",

@@ -17,6 +17,7 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/labs/style/pixeldensitymonitor.js"],
     lenient = True,
     deps = [
+        "//closure/library/dom",
         "//closure/library/events",
         "//closure/library/events:eventtarget",
     ],

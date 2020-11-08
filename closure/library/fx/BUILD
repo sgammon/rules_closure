@@ -39,6 +39,7 @@ closure_js_library(
         "//closure/library/dom",
         "//closure/library/dom:classlist",
         "//closure/library/events",
+        "//closure/library/events:browserevent",
         "//closure/library/events:event",
         "//closure/library/events:eventhandler",
         "//closure/library/events:eventtarget",
@@ -72,6 +73,7 @@ closure_js_library(
         "//closure/library/array",
         "//closure/library/asserts",
         "//closure/library/events",
+        "//closure/library/events:event",
         "//closure/library/fx:animation",
         "//closure/library/fx:transition",
         "//closure/library/fx:transitionbase",
@@ -82,7 +84,11 @@ closure_js_library(
     name = "cssspriteanimation",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/fx/cssspriteanimation.js"],
     lenient = True,
-    deps = ["//closure/library/fx:animation"],
+    deps = [
+        "//closure/library/fx:animation",
+        "//closure/library/math:box",
+        "//closure/library/math:size",
+    ],
 )
 
 closure_js_library(
@@ -92,6 +98,7 @@ closure_js_library(
     deps = [
         "//closure/library/color",
         "//closure/library/events",
+        "//closure/library/events:eventhandler",
         "//closure/library/fx:animation",
         "//closure/library/fx:transition",
         "//closure/library/style",
@@ -124,6 +131,7 @@ closure_js_library(
         "//closure/library/dom",
         "//closure/library/dom:tagname",
         "//closure/library/events",
+        "//closure/library/events:browserevent",
         "//closure/library/events:event",
         "//closure/library/events:eventhandler",
         "//closure/library/events:eventtarget",
@@ -147,6 +155,7 @@ closure_js_library(
         "//closure/library/dom",
         "//closure/library/dom:classlist",
         "//closure/library/events",
+        "//closure/library/events:browserevent",
         "//closure/library/events:event",
         "//closure/library/events:eventhandler",
         "//closure/library/events:eventid",
@@ -154,6 +163,7 @@ closure_js_library(
         "//closure/library/events:eventtype",
         "//closure/library/fx:dragger",
         "//closure/library/math:coordinate",
+        "//closure/library/math:rect",
         "//closure/library/string",
         "//closure/library/style",
     ],
@@ -166,9 +176,11 @@ closure_js_library(
     deps = [
         "//closure/library/disposable",
         "//closure/library/dom",
+        "//closure/library/events:event",
         "//closure/library/events:eventhandler",
         "//closure/library/events:eventtype",
         "//closure/library/math:coordinate",
+        "//closure/library/math:rect",
         "//closure/library/style",
         "//closure/library/timer",
     ],

@@ -50,6 +50,7 @@ closure_js_library(
         "//closure/library/dom:nodetype",
         "//closure/library/dom:tagname",
         "//closure/library/dom:vendor",
+        "//closure/library/events:event",
         "//closure/library/html:safestylesheet",
         "//closure/library/math:box",
         "//closure/library/math:coordinate",

@@ -49,6 +49,7 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/messaging:portnetwork",
+        "//closure/library/testing:mockcontrol",
         "//closure/library/testing/messaging:mockmessagechannel",
     ],
 )

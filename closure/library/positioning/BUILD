@@ -27,7 +27,9 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/positioning/absoluteposition.js"],
     lenient = True,
     deps = [
+        "//closure/library/math:box",
         "//closure/library/math:coordinate",
+        "//closure/library/math:size",
         "//closure/library/positioning",
         "//closure/library/positioning:abstractposition",
     ],
@@ -37,6 +39,11 @@ closure_js_library(
     name = "abstractposition",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/positioning/abstractposition.js"],
     lenient = True,
+    deps = [
+        "//closure/library/math:box",
+        "//closure/library/math:size",
+        "//closure/library/positioning",
+    ],
 )
 
 closure_js_library(
@@ -44,6 +51,8 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/positioning/anchoredposition.js"],
     lenient = True,
     deps = [
+        "//closure/library/math:box",
+        "//closure/library/math:size",
         "//closure/library/positioning",
         "//closure/library/positioning:abstractposition",
     ],
@@ -54,6 +63,8 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/positioning/anchoredviewportposition.js"],
     lenient = True,
     deps = [
+        "//closure/library/math:box",
+        "//closure/library/math:size",
         "//closure/library/positioning",
         "//closure/library/positioning:anchoredposition",
     ],
@@ -66,7 +77,9 @@ closure_js_library(
     deps = [
         "//closure/library/asserts",
         "//closure/library/dom",
+        "//closure/library/math:box",
         "//closure/library/math:coordinate",
+        "//closure/library/math:size",
         "//closure/library/positioning",
         "//closure/library/positioning:abstractposition",
         "//closure/library/style",
@@ -91,6 +104,7 @@ closure_js_library(
         "//closure/library/asserts",
         "//closure/library/dom",
         "//closure/library/dom:tagname",
+        "//closure/library/math:box",
         "//closure/library/math:coordinate",
         "//closure/library/math:rect",
         "//closure/library/math:size",
@@ -105,7 +119,9 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/dom",
+        "//closure/library/math:box",
         "//closure/library/math:coordinate",
+        "//closure/library/math:size",
         "//closure/library/positioning",
         "//closure/library/positioning:clientposition",
         "//closure/library/style",
@@ -117,7 +133,9 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/positioning/viewportposition.js"],
     lenient = True,
     deps = [
+        "//closure/library/math:box",
         "//closure/library/math:coordinate",
+        "//closure/library/math:size",
         "//closure/library/positioning",
         "//closure/library/positioning:abstractposition",
         "//closure/library/style",

@@ -20,6 +20,7 @@ closure_js_library(
         "//closure/library/dom",
         "//closure/library/dom:vendor",
         "//closure/library/events",
+        "//closure/library/events:browserevent",
         "//closure/library/events:event",
         "//closure/library/events:eventtarget",
         "//closure/library/events:eventtype",

@@ -87,6 +87,7 @@ closure_js_library(
         "//closure/library/dom",
         "//closure/library/dom:safe",
         "//closure/library/dom:tagname",
+        "//closure/library/html:trustedresourceurl",
         "//closure/library/log",
     ],
 )
@@ -100,6 +101,7 @@ closure_js_library(
         "//closure/library/datasource:datamanager",
         "//closure/library/datasource:fastdatanode",
         "//closure/library/events",
+        "//closure/library/events:event",
         "//closure/library/log",
         "//closure/library/net:eventtype",
         "//closure/library/net:xhrio",
@@ -116,6 +118,7 @@ closure_js_library(
         "//closure/library/datasource:datamanager",
         "//closure/library/dom:nodetype",
         "//closure/library/dom:xml",
+        "//closure/library/events:event",
         "//closure/library/log",
         "//closure/library/net:xhrio",
         "//closure/library/string",

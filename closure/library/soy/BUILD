@@ -42,6 +42,8 @@ closure_js_library(
     deps = [
         "//closure/library/asserts",
         "//closure/library/dom",
+        "//closure/library/html:safehtml",
+        "//closure/library/html:safestylesheet",
         "//closure/library/soy",
         "//closure/library/soy:data",
     ],

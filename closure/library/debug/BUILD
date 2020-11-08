@@ -153,6 +153,7 @@ closure_js_library(
         "//closure/library/log",
         "//closure/library/net:xhrio",
         "//closure/library/object",
+        "//closure/library/structs:map",
         "//closure/library/uri:utils",
         "//closure/library/useragent",
     ],
@@ -190,6 +191,7 @@ closure_js_library(
         "//closure/library/html:safehtml",
         "//closure/library/html:safeurl",
         "//closure/library/html:uncheckedconversions",
+        "//closure/library/log",
         "//closure/library/string:const",
     ],
 )

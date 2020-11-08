@@ -268,6 +268,7 @@ closure_js_library(
         "//closure/library/promise",
         "//closure/library/testing:functionmock",
         "//closure/library/testing:loosemock",
+        "//closure/library/testing:mockinterface",
         "//closure/library/testing:strictmock",
     ],
 )
@@ -289,6 +290,7 @@ closure_js_library(
         "//closure/library/array",
         "//closure/library/dom",
         "//closure/library/testing:asserts",
+        "//closure/library/testing:mock",
     ],
 )
 
@@ -344,6 +346,7 @@ closure_js_library(
         "//closure/library/dom",
         "//closure/library/dom:classlist",
         "//closure/library/dom:tagname",
+        "//closure/library/events:browserevent",
         "//closure/library/events:eventhandler",
         "//closure/library/functions",
         "//closure/library/object",

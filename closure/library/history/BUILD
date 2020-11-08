@@ -42,6 +42,7 @@ closure_js_library(
         "//closure/library/dom",
         "//closure/library/dom:inputtype",
         "//closure/library/dom:safe",
+        "//closure/library/events:browserevent",
         "//closure/library/events:event",
         "//closure/library/events:eventhandler",
         "//closure/library/events:eventtarget",
@@ -67,6 +68,7 @@ closure_js_library(
     deps = [
         "//closure/library/asserts",
         "//closure/library/events",
+        "//closure/library/events:browserevent",
         "//closure/library/events:eventtarget",
         "//closure/library/events:eventtype",
         "//closure/library/history:event",

@@ -91,6 +91,8 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/asserts",
+        "//closure/library/net:xhrio",
+        "//closure/library/net/streams:nodereadablestream",
         "//closure/library/net/streams:xhrnodereadablestream",
         "//closure/library/net/streams:xhrstreamreader",
     ],
@@ -125,6 +127,7 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/net/streams/xhrstreamreader.js"],
     lenient = True,
     deps = [
+        "//closure/library/events:event",
         "//closure/library/events:eventhandler",
         "//closure/library/log",
         "//closure/library/net:errorcode",
@@ -136,6 +139,7 @@ closure_js_library(
         "//closure/library/net/streams:jsonstreamparser",
         "//closure/library/net/streams:pbjsonstreamparser",
         "//closure/library/net/streams:pbstreamparser",
+        "//closure/library/net/streams:streamparser",
         "//closure/library/string",
         "//closure/library/useragent",
     ],

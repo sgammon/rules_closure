@@ -33,7 +33,7 @@ REPO = 'com_google_javascript_closure_library'
 
 PROVIDE_PATTERN = re.compile(r'^goog\.(?:provide|module)\([\'"]([^\'"]+)', re.M)
 REQUIRE_PATTERN = re.compile(
-    r'^(?:(?:const|var) .* = )?goog\.require\([\'"]([^\'"]+)', re.M)
+    r'^(?:(?:const|var) .* = )?goog\.(require|requireType)\([\'"]([^\'"]+)', re.M)
 
 TESTONLY_PATTERN = re.compile(r'^goog\.setTestOnly\(', re.M)
 TESTONLY_PATHS_PATTERN = re.compile(r'(?:%s)' % '|'.join((
@@ -164,7 +164,8 @@ def main(basejs, outdir):
         for provide in provides:
           provide2file[provide] = f
         file2requires[f] = sorted(set(
-            m.group(1) for m in REQUIRE_PATTERN.finditer(data)))
+            m.group(2) for m in REQUIRE_PATTERN.finditer(data)))
+        print("- requires for '%s': \n%s" % (f, file2requires[f]))
       else:
         jsrawlibs.add(f)
       jslibs.append(f)

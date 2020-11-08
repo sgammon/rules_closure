@@ -17,7 +17,9 @@ closure_js_library(
         "//closure/library/net:errorcode",
         "//closure/library/net:eventtype",
         "//closure/library/net:iframeio",
+        "//closure/library/structs:map",
         "//closure/library/testing:testqueue",
+        "//closure/library/uri",
     ],
 )
 
@@ -34,6 +36,7 @@ closure_js_library(
         "//closure/library/net:eventtype",
         "//closure/library/net:httpstatus",
         "//closure/library/net:xhrio",
+        "//closure/library/net:xhrlike",
         "//closure/library/net:xmlhttp",
         "//closure/library/object",
         "//closure/library/structs",
@@ -50,6 +53,7 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/testing/net/xhriopool.js"],
     lenient = True,
     deps = [
+        "//closure/library/net:xhrio",
         "//closure/library/net:xhriopool",
         "//closure/library/testing/net:xhrio",
     ],

@@ -48,6 +48,7 @@ closure_js_library(
         "//closure/library/dom",
         "//closure/library/dom:browserfeature",
         "//closure/library/dom:nodetype",
+        "//closure/library/dom/browserrange:abstractrange",
         "//closure/library/dom/browserrange:geckorange",
         "//closure/library/dom/browserrange:ierange",
         "//closure/library/dom/browserrange:operarange",

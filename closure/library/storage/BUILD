@@ -30,6 +30,7 @@ closure_js_library(
         "//closure/library/storage:errorcode",
         "//closure/library/storage:expiringstorage",
         "//closure/library/storage:richstorage",
+        "//closure/library/storage/mechanism:iterablemechanism",
     ],
 )
 
@@ -38,7 +39,12 @@ closure_js_library(
     testonly = True,
     srcs = ["@com_google_javascript_closure_library//:closure/goog/storage/collectablestoragetester.js"],
     lenient = True,
-    deps = ["//closure/library/testing:asserts"],
+    deps = [
+        "//closure/library/storage:collectablestorage",
+        "//closure/library/storage/mechanism:iterablemechanism",
+        "//closure/library/testing:asserts",
+        "//closure/library/testing:mockclock",
+    ],
 )
 
 closure_js_library(
@@ -54,6 +60,7 @@ closure_js_library(
         "//closure/library/storage:collectablestorage",
         "//closure/library/storage:errorcode",
         "//closure/library/storage:richstorage",
+        "//closure/library/storage/mechanism:iterablemechanism",
     ],
 )
 
@@ -67,7 +74,10 @@ closure_js_library(
     name = "expiringstorage",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/storage/expiringstorage.js"],
     lenient = True,
-    deps = ["//closure/library/storage:richstorage"],
+    deps = [
+        "//closure/library/storage:richstorage",
+        "//closure/library/storage/mechanism",
+    ],
 )
 
 closure_js_library(
@@ -77,6 +87,7 @@ closure_js_library(
     deps = [
         "//closure/library/storage",
         "//closure/library/storage:errorcode",
+        "//closure/library/storage/mechanism",
     ],
 )
 
@@ -87,6 +98,7 @@ closure_js_library(
     deps = [
         "//closure/library/json",
         "//closure/library/storage:errorcode",
+        "//closure/library/storage/mechanism",
     ],
 )
 

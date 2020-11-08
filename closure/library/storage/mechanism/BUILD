@@ -113,6 +113,7 @@ closure_js_library(
         "//closure/library/storage/mechanism:html5localstorage",
         "//closure/library/storage/mechanism:html5sessionstorage",
         "//closure/library/storage/mechanism:ieuserdata",
+        "//closure/library/storage/mechanism:iterablemechanism",
         "//closure/library/storage/mechanism:prefixedmechanism",
     ],
 )

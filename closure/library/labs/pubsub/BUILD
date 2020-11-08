@@ -20,6 +20,7 @@ closure_js_library(
         "//closure/library/array",
         "//closure/library/async:run",
         "//closure/library/disposable",
+        "//closure/library/events:browserevent",
         "//closure/library/events:eventhandler",
         "//closure/library/events:eventtype",
         "//closure/library/log",

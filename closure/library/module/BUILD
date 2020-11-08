@@ -26,6 +26,7 @@ closure_js_library(
     name = "abstractmoduleloader",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/module/abstractmoduleloader.js"],
     lenient = True,
+    deps = ["//closure/library/module:moduleinfo"],
 )
 
 closure_js_library(
@@ -107,6 +108,7 @@ closure_js_library(
         "//closure/library/labs/useragent:browser",
         "//closure/library/log",
         "//closure/library/module:abstractmoduleloader",
+        "//closure/library/module:moduleinfo",
         "//closure/library/net:bulkloader",
         "//closure/library/net:eventtype",
         "//closure/library/net:jsloader",
@@ -137,6 +139,7 @@ closure_js_library(
         "//closure/library/loader:activemodulemanager",
         "//closure/library/log",
         "//closure/library/module",
+        "//closure/library/module:abstractmoduleloader",
         "//closure/library/module:moduleinfo",
         "//closure/library/module:moduleloadcallback",
         "//closure/library/module:moduleloadfailuretype",

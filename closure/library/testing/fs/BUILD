@@ -33,6 +33,7 @@ closure_js_library(
         "//closure/library/object",
         "//closure/library/string",
         "//closure/library/testing/fs:file",
+        "//closure/library/testing/fs:filesystem",
         "//closure/library/testing/fs:filewriter",
         "//closure/library/timer",
         "//third_party/closure/library/mochikit/async:deferred",
@@ -84,6 +85,7 @@ closure_js_library(
         "//closure/library/fs:filesaver",
         "//closure/library/string",
         "//closure/library/testing/fs:blob",
+        "//closure/library/testing/fs:entry",
         "//closure/library/testing/fs:file",
         "//closure/library/testing/fs:progressevent",
         "//closure/library/timer",
@@ -111,5 +113,9 @@ closure_js_library(
     testonly = True,
     srcs = ["@com_google_javascript_closure_library//:closure/goog/testing/fs/progressevent.js"],
     lenient = True,
-    deps = ["//closure/library/events:event"],
+    deps = [
+        "//closure/library/events:event",
+        "//closure/library/fs:filereader",
+        "//closure/library/fs:filesaver",
+    ],
 )

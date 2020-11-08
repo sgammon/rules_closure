@@ -29,12 +29,14 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/asserts",
+        "//closure/library/dom",
         "//closure/library/dom:safe",
         "//closure/library/dom:tagname",
         "//closure/library/events:event",
         "//closure/library/events:eventhandler",
         "//closure/library/events:eventtype",
         "//closure/library/html:flash",
+        "//closure/library/html:safehtml",
         "//closure/library/html:trustedresourceurl",
         "//closure/library/log",
         "//closure/library/object",
@@ -52,8 +54,10 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/ui/media/flickr.js"],
     lenient = True,
     deps = [
+        "//closure/library/dom",
         "//closure/library/html:trustedresourceurl",
         "//closure/library/string:const",
+        "//closure/library/ui:control",
         "//closure/library/ui/media",
         "//closure/library/ui/media:flashobject",
         "//closure/library/ui/media:mediamodel",
@@ -65,9 +69,11 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/ui/media/googlevideo.js"],
     lenient = True,
     deps = [
+        "//closure/library/dom",
         "//closure/library/html:trustedresourceurl",
         "//closure/library/string",
         "//closure/library/string:const",
+        "//closure/library/ui:control",
         "//closure/library/ui/media",
         "//closure/library/ui/media:flashobject",
         "//closure/library/ui/media:mediamodel",
@@ -80,11 +86,13 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/asserts",
+        "//closure/library/dom",
         "//closure/library/dom:tagname",
         "//closure/library/style",
         "//closure/library/ui:component",
         "//closure/library/ui:control",
         "//closure/library/ui:controlrenderer",
+        "//closure/library/ui/media:mediamodel",
     ],
 )
 
@@ -95,6 +103,7 @@ closure_js_library(
     deps = [
         "//closure/library/array",
         "//closure/library/html:trustedresourceurl",
+        "//closure/library/math:size",
     ],
 )
 
@@ -103,9 +112,12 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/ui/media/mp3.js"],
     lenient = True,
     deps = [
+        "//closure/library/dom",
         "//closure/library/string",
+        "//closure/library/ui:control",
         "//closure/library/ui/media",
         "//closure/library/ui/media:flashobject",
+        "//closure/library/ui/media:mediamodel",
     ],
 )
 
@@ -115,7 +127,9 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/dom:tagname",
+        "//closure/library/ui:control",
         "//closure/library/ui/media",
+        "//closure/library/ui/media:mediamodel",
     ],
 )
 
@@ -124,8 +138,10 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/ui/media/picasa.js"],
     lenient = True,
     deps = [
+        "//closure/library/dom",
         "//closure/library/html:trustedresourceurl",
         "//closure/library/string:const",
+        "//closure/library/ui:control",
         "//closure/library/ui/media",
         "//closure/library/ui/media:flashobject",
         "//closure/library/ui/media:mediamodel",
@@ -137,9 +153,11 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/ui/media/vimeo.js"],
     lenient = True,
     deps = [
+        "//closure/library/dom",
         "//closure/library/html:trustedresourceurl",
         "//closure/library/string",
         "//closure/library/string:const",
+        "//closure/library/ui:control",
         "//closure/library/ui/media",
         "//closure/library/ui/media:flashobject",
         "//closure/library/ui/media:mediamodel",
@@ -151,11 +169,13 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/ui/media/youtube.js"],
     lenient = True,
     deps = [
+        "//closure/library/dom",
         "//closure/library/dom:tagname",
         "//closure/library/html:trustedresourceurl",
         "//closure/library/string",
         "//closure/library/string:const",
         "//closure/library/ui:component",
+        "//closure/library/ui:control",
         "//closure/library/ui/media",
         "//closure/library/ui/media:flashobject",
         "//closure/library/ui/media:mediamodel",
