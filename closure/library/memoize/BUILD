@@ -16,4 +16,5 @@ closure_js_library(
     name = "memoize",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/memoize/memoize.js"],
     lenient = True,
+    deps = ["//closure/library/reflect"],
 )

@@ -22,6 +22,7 @@ closure_js_library(
         ":controlrange",
         ":dataset",
         ":dom",
+        ":element",
         ":fontsizemonitor",
         ":forms",
         ":fullscreen",
@@ -74,7 +75,6 @@ closure_js_library(
     deps = [
         "//closure/library/dom",
         "//closure/library/dom:nodetype",
-        "//closure/library/dom:savedcaretrange",
         "//closure/library/dom:tagiterator",
         "//closure/library/useragent",
     ],
@@ -152,6 +152,7 @@ closure_js_library(
         "//closure/library/dom",
         "//closure/library/dom:abstractmultirange",
         "//closure/library/dom:abstractrange",
+        "//closure/library/dom:savedcaretrange",
         "//closure/library/dom:savedrange",
         "//closure/library/dom:tagiterator",
         "//closure/library/dom:textrange",
@@ -188,7 +189,18 @@ closure_js_library(
         "//closure/library/math:size",
         "//closure/library/object",
         "//closure/library/string",
+        "//closure/library/string:const",
         "//closure/library/useragent",
+    ],
+)
+
+closure_js_library(
+    name = "element",
+    srcs = ["@com_google_javascript_closure_library//:closure/goog/dom/element.js"],
+    lenient = True,
+    deps = [
+        "//closure/library/dom:nodetype",
+        "//closure/library/dom:tagname",
     ],
 )
 
@@ -270,6 +282,7 @@ closure_js_library(
         "//closure/library/dom",
         "//closure/library/dom:abstractmultirange",
         "//closure/library/dom:abstractrange",
+        "//closure/library/dom:savedcaretrange",
         "//closure/library/dom:savedrange",
         "//closure/library/dom:textrange",
         "//closure/library/iter",
@@ -418,11 +431,11 @@ closure_js_library(
         "//closure/library/array",
         "//closure/library/dom",
         "//closure/library/dom:abstractrange",
+        "//closure/library/dom:savedcaretrange",
         "//closure/library/dom:savedrange",
         "//closure/library/dom:tagname",
         "//closure/library/dom:textrangeiterator",
         "//closure/library/dom/browserrange",
-        "//closure/library/string",
         "//closure/library/useragent",
     ],
 )
@@ -469,6 +482,7 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/dom/viewportsizemonitor.js"],
     lenient = True,
     deps = [
+        "//closure/library/disposable",
         "//closure/library/dom",
         "//closure/library/events",
         "//closure/library/events:eventtarget",

@@ -143,6 +143,7 @@ closure_js_library(
     deps = [
         "//closure/library/array",
         "//closure/library/asserts",
+        "//closure/library/disposable",
         "//closure/library/dom",
         "//closure/library/dom:classlist",
         "//closure/library/events",

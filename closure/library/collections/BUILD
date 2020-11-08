@@ -9,12 +9,21 @@ load("//closure:defs.bzl", "closure_js_library")
 
 closure_js_library(
     name = "all_js",
-    exports = [":sets"],
+    exports = [
+        ":iters",
+        ":sets",
+    ],
+)
+
+closure_js_library(
+    name = "iters",
+    srcs = ["@com_google_javascript_closure_library//:closure/goog/collections/iters.js"],
+    lenient = True,
 )
 
 closure_js_library(
     name = "sets",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/collections/sets.js"],
     lenient = True,
-    deps = ["//closure/library/labs/collections:iterables"],
+    deps = ["//closure/library/collections:iters"],
 )

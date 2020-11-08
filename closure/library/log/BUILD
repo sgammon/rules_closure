@@ -18,6 +18,7 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/debug",
+        "//closure/library/debug:logbuffer",
         "//closure/library/debug:logger",
         "//closure/library/debug:logrecord",
     ],

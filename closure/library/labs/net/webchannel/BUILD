@@ -10,7 +10,6 @@ load("//closure:defs.bzl", "closure_js_library")
 closure_js_library(
     name = "all_js",
     exports = [
-        ":basetestchannel",
         ":channel",
         ":channelrequest",
         ":connectionstate",
@@ -27,19 +26,6 @@ closure_js_library(
 )
 
 closure_js_library(
-    name = "basetestchannel",
-    srcs = ["@com_google_javascript_closure_library//:closure/goog/labs/net/webchannel/basetestchannel.js"],
-    lenient = True,
-    deps = [
-        "//closure/library/labs/net:webchannel",
-        "//closure/library/labs/net/webchannel:channel",
-        "//closure/library/labs/net/webchannel:channelrequest",
-        "//closure/library/labs/net/webchannel:requeststats",
-        "//closure/library/labs/net/webchannel:webchanneldebug",
-    ],
-)
-
-closure_js_library(
     name = "channel",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/labs/net/webchannel/channel.js"],
     lenient = True,
@@ -50,7 +36,9 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/labs/net/webchannel/channelrequest.js"],
     lenient = True,
     deps = [
+        "//closure/library/asserts",
         "//closure/library/async:throttle",
+        "//closure/library/disposable",
         "//closure/library/events:eventhandler",
         "//closure/library/labs/net:webchannel",
         "//closure/library/labs/net/webchannel:channel",
@@ -89,7 +77,6 @@ closure_js_library(
         "//closure/library/labs/net/webchannel:channelrequest",
         "//closure/library/labs/net/webchannel:wire",
         "//closure/library/string",
-        "//closure/library/structs:set",
     ],
 )
 
@@ -123,7 +110,6 @@ closure_js_library(
         "//closure/library/async:run",
         "//closure/library/json",
         "//closure/library/labs/net:webchannel",
-        "//closure/library/labs/net/webchannel:basetestchannel",
         "//closure/library/labs/net/webchannel:channel",
         "//closure/library/labs/net/webchannel:channelrequest",
         "//closure/library/labs/net/webchannel:connectionstate",
@@ -159,7 +145,6 @@ closure_js_library(
         "//closure/library/log",
         "//closure/library/object",
         "//closure/library/string",
-        "//closure/library/string:path",
     ],
 )
 

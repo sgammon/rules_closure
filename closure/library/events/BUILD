@@ -152,7 +152,6 @@ closure_js_library(
     testonly = True,
     srcs = ["@com_google_javascript_closure_library//:closure/goog/events/eventtargettester.js"],
     lenient = True,
-    suppress = ["strictMissingRequire"],
     deps = [
         "//closure/library/array",
         "//closure/library/events:event",

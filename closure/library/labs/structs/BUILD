@@ -16,8 +16,5 @@ closure_js_library(
     name = "multimap",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/labs/structs/multimap.js"],
     lenient = True,
-    deps = [
-        "//closure/library/array",
-        "//closure/library/object",
-    ],
+    deps = ["//closure/library/array"],
 )

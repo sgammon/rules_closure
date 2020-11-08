@@ -34,7 +34,6 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/uri/utils.js"],
     lenient = True,
     deps = [
-        "//closure/library/array",
         "//closure/library/asserts",
         "//closure/library/string",
     ],

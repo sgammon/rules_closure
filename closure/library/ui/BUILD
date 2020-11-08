@@ -76,6 +76,7 @@ closure_js_library(
         ":keyboardshortcuthandler",
         ":labelinput",
         ":linkbuttonrenderer",
+        ":map",
         ":menu",
         ":menubar",
         ":menubardecorator",
@@ -348,6 +349,7 @@ closure_js_library(
         "//closure/library/a11y/aria:attributes",
         "//closure/library/array",
         "//closure/library/asserts",
+        "//closure/library/disposable",
         "//closure/library/dom",
         "//closure/library/dom:classlist",
         "//closure/library/dom:tagname",
@@ -447,7 +449,6 @@ closure_js_library(
         "//closure/library/dom:classlist",
         "//closure/library/dom:tagname",
         "//closure/library/ui:menubuttonrenderer",
-        "//closure/library/useragent",
     ],
 )
 
@@ -735,6 +736,7 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/a11y/aria",
+        "//closure/library/a11y/aria:attributes",
         "//closure/library/asserts",
         "//closure/library/date",
         "//closure/library/date:daterange",
@@ -802,8 +804,8 @@ closure_js_library(
         "//closure/library/html:safehtml",
         "//closure/library/math:rect",
         "//closure/library/string",
-        "//closure/library/structs:map",
         "//closure/library/style",
+        "//closure/library/ui:map",
         "//closure/library/ui:modalpopup",
     ],
 )
@@ -1202,6 +1204,12 @@ closure_js_library(
 )
 
 closure_js_library(
+    name = "map",
+    srcs = ["@com_google_javascript_closure_library//:closure/goog/ui/map.js"],
+    lenient = True,
+)
+
+closure_js_library(
     name = "menu",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/ui/menu.js"],
     lenient = True,
@@ -1428,6 +1436,7 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/asserts",
+        "//closure/library/disposable",
         "//closure/library/dom",
         "//closure/library/dom:classlist",
         "//closure/library/dom:iframe",
@@ -1479,11 +1488,13 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/array",
+        "//closure/library/asserts",
         "//closure/library/dom",
         "//closure/library/events",
         "//closure/library/events:eventtype",
         "//closure/library/events:keycodes",
         "//closure/library/math:size",
+        "//closure/library/style",
         "//closure/library/ui:component",
         "//closure/library/ui:control",
         "//closure/library/ui:paletterenderer",
@@ -1555,6 +1566,7 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/array",
+        "//closure/library/disposable",
         "//closure/library/dom",
         "//closure/library/dom:tagname",
         "//closure/library/events",
@@ -1693,6 +1705,7 @@ closure_js_library(
     deps = [
         "//closure/library/asserts",
         "//closure/library/dom:classlist",
+        "//closure/library/object",
     ],
 )
 
@@ -1872,6 +1885,7 @@ closure_js_library(
         "//closure/library/a11y/aria:roles",
         "//closure/library/array",
         "//closure/library/asserts",
+        "//closure/library/disposable",
         "//closure/library/dom",
         "//closure/library/dom:classlist",
         "//closure/library/dom:tagname",
@@ -1901,6 +1915,7 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/asserts",
+        "//closure/library/disposable",
         "//closure/library/dom",
         "//closure/library/dom:classlist",
         "//closure/library/dom:tagname",
@@ -2219,6 +2234,7 @@ closure_js_library(
     deps = [
         "//closure/library/array",
         "//closure/library/asserts",
+        "//closure/library/disposable",
         "//closure/library/dom",
         "//closure/library/dom:safe",
         "//closure/library/dom:tagname",
@@ -2283,6 +2299,7 @@ closure_js_library(
         "//closure/library/a11y/aria",
         "//closure/library/a11y/aria:attributes",
         "//closure/library/a11y/aria:roles",
+        "//closure/library/disposable",
         "//closure/library/dom",
         "//closure/library/dom:classlist",
         "//closure/library/events:event",

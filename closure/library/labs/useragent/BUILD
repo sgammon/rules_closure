@@ -54,10 +54,7 @@ closure_js_library(
     name = "extra",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/labs/useragent/extra.js"],
     lenient = True,
-    deps = [
-        "//closure/library/labs/useragent:browser",
-        "//closure/library/labs/useragent:platform",
-    ],
+    deps = ["//closure/library/labs/useragent:platform"],
 )
 
 closure_js_library(

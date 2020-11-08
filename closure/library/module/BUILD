@@ -25,10 +25,6 @@ closure_js_library(
     name = "abstractmoduleloader",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/module/abstractmoduleloader.js"],
     lenient = True,
-    deps = [
-        "//closure/library/module",
-        "//closure/library/module:moduleinfo",
-    ],
 )
 
 closure_js_library(
@@ -98,6 +94,7 @@ closure_js_library(
         "//closure/library/asserts",
         "//closure/library/dom",
         "//closure/library/dom:safe",
+        "//closure/library/dom:tagname",
         "//closure/library/events",
         "//closure/library/events:event",
         "//closure/library/events:eventhandler",
@@ -124,6 +121,7 @@ closure_js_library(
     deps = [
         "//closure/library/array",
         "//closure/library/asserts",
+        "//closure/library/debug:error",
         "//closure/library/debug:tracer",
         "//closure/library/disposable",
         "//closure/library/disposable:idisposable",

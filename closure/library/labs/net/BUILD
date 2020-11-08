@@ -24,6 +24,7 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/labs/net/image.js"],
     lenient = True,
     deps = [
+        "//closure/library/disposable",
         "//closure/library/dom:safe",
         "//closure/library/events:eventhandler",
         "//closure/library/events:eventtype",
@@ -56,10 +57,7 @@ closure_js_library(
     name = "webchanneltransportfactory",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/labs/net/webchanneltransportfactory.js"],
     lenient = True,
-    deps = [
-        "//closure/library/functions",
-        "//closure/library/labs/net/webchannel:webchannelbasetransport",
-    ],
+    deps = ["//closure/library/labs/net/webchannel:webchannelbasetransport"],
 )
 
 closure_js_library(

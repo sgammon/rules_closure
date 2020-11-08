@@ -29,6 +29,7 @@ closure_js_library(
         "//closure/library/dom",
         "//closure/library/dom:tagname",
         "//closure/library/object",
+        "//closure/library/string",
         "//closure/library/timer",
     ],
 )

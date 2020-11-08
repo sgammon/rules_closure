@@ -13,7 +13,6 @@ closure_js_library(
         ":crosspagechannel",
         ":crosspagechannelrole",
         ":directtransport",
-        ":iframepollingtransport",
         ":nativemessagingtransport",
         ":relay",
         ":transport",
@@ -73,28 +72,12 @@ closure_js_library(
 )
 
 closure_js_library(
-    name = "iframepollingtransport",
-    srcs = ["@com_google_javascript_closure_library//:closure/goog/net/xpc/iframepollingtransport.js"],
-    lenient = True,
-    deps = [
-        "//closure/library/array",
-        "//closure/library/dom",
-        "//closure/library/dom:safe",
-        "//closure/library/dom:tagname",
-        "//closure/library/log",
-        "//closure/library/net/xpc",
-        "//closure/library/net/xpc:crosspagechannelrole",
-        "//closure/library/net/xpc:transport",
-        "//closure/library/useragent",
-    ],
-)
-
-closure_js_library(
     name = "nativemessagingtransport",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/net/xpc/nativemessagingtransport.js"],
     lenient = True,
     deps = [
         "//closure/library/asserts",
+        "//closure/library/disposable",
         "//closure/library/events",
         "//closure/library/events:eventhandler",
         "//closure/library/log",

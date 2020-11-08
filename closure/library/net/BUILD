@@ -146,10 +146,7 @@ closure_js_library(
     name = "cookies",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/net/cookies.js"],
     lenient = True,
-    deps = [
-        "//closure/library/asserts",
-        "//closure/library/string",
-    ],
+    deps = ["//closure/library/string"],
 )
 
 closure_js_library(
@@ -223,6 +220,7 @@ closure_js_library(
         "//closure/library/events",
         "//closure/library/events:eventhandler",
         "//closure/library/fs",
+        "//closure/library/fs:blob",
         "//closure/library/fs:entry",
         "//closure/library/fs:error",
         "//closure/library/fs:filesaver",
@@ -298,6 +296,7 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/array",
+        "//closure/library/disposable",
         "//closure/library/dom",
         "//closure/library/dom:tagname",
         "//closure/library/events:eventhandler",

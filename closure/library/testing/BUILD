@@ -137,6 +137,7 @@ closure_js_library(
         "//closure/library/object",
         "//closure/library/testing:loosemock",
         "//closure/library/testing:mock",
+        "//closure/library/testing:mockinterface",
         "//closure/library/testing:propertyreplacer",
         "//closure/library/testing:strictmock",
     ],
@@ -247,6 +248,7 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/testing/mockclock.js"],
     lenient = True,
     deps = [
+        "//closure/library/asserts",
         "//closure/library/async:run",
         "//closure/library/disposable",
         "//closure/library/promise",
@@ -305,6 +307,7 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/dom:abstractrange",
+        "//closure/library/dom:savedcaretrange",
         "//closure/library/testing:loosemock",
     ],
 )
@@ -361,6 +364,14 @@ closure_js_library(
 )
 
 closure_js_library(
+    name = "objects",
+    testonly = True,
+    srcs = ["@com_google_javascript_closure_library//:closure/goog/testing/objects.js"],
+    lenient = True,
+    deps = ["//closure/library/testing:asserts"],
+)
+
+closure_js_library(
     name = "performancetable",
     testonly = True,
     srcs = ["@com_google_javascript_closure_library//:closure/goog/testing/performancetable.js"],
@@ -368,7 +379,9 @@ closure_js_library(
     deps = [
         "//closure/library/asserts",
         "//closure/library/dom",
+        "//closure/library/dom:safe",
         "//closure/library/dom:tagname",
+        "//closure/library/string:const",
         "//closure/library/testing:performancetimer",
     ],
 )
@@ -462,6 +475,7 @@ closure_js_library(
     deps = [
         "//closure/library/array",
         "//closure/library/asserts",
+        "//closure/library/debug",
         "//closure/library/dom",
         "//closure/library/dom:tagname",
         "//closure/library/object",

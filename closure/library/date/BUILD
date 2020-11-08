@@ -11,7 +11,6 @@ closure_js_library(
     name = "all_js",
     exports = [
         ":date",
-        ":datelike",
         ":daterange",
         ":duration",
         ":relative",
@@ -25,16 +24,9 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/asserts",
-        "//closure/library/date:datelike",
         "//closure/library/i18n:datetimesymbols",
         "//closure/library/string",
     ],
-)
-
-closure_js_library(
-    name = "datelike",
-    srcs = ["@com_google_javascript_closure_library//:closure/goog/date/datelike.js"],
-    lenient = True,
 )
 
 closure_js_library(

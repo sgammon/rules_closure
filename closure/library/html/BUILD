@@ -202,6 +202,9 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/asserts",
+        "//closure/library/fs:blob",
+        "//closure/library/fs:url",
+        "//closure/library/html:safescript",
         "//closure/library/html:trustedtypes",
         "//closure/library/i18n:bidi",
         "//closure/library/string:const",

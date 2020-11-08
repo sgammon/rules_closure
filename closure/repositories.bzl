@@ -678,7 +678,7 @@ def com_google_java_format():
     )
 
 def com_google_javascript_closure_compiler():
-    version = "v20200614"
+    version = "v20200920"
     jar = "closure-compiler-unshaded-%s.jar" % version
     java_import_external(
         name = "com_google_javascript_closure_compiler",
@@ -687,7 +687,7 @@ def com_google_javascript_closure_compiler():
             "https://mirror.bazel.build/repo1.maven.org/maven2/com/google/javascript/closure-compiler-unshaded/%s/%s" % (version, jar),
             "https://repo1.maven.org/maven2/com/google/javascript/closure-compiler-unshaded/%s/%s" % (version, jar),
         ],
-        jar_sha256 = "d2ad499608b55c08459de3a722fcf77230773b8a0c1d2809abb5e6fb25571c0f",
+        jar_sha256 = "07acb4f93ce45d502867e38044d09d41d09ad357cf47c5307dd1c5add9cdf99b",
         deps = [
             "@com_google_code_gson",
             "@com_google_guava",
@@ -720,11 +720,11 @@ def com_google_javascript_closure_library():
     http_archive(
         name = "com_google_javascript_closure_library",
         urls = [
-            "https://mirror.bazel.build/github.com/google/closure-library/archive/v20191027.tar.gz",
-            "https://github.com/google/closure-library/archive/v20191027.tar.gz",
+            "https://mirror.bazel.build/github.com/google/closure-library/archive/v20200927.tar.gz",
+            "https://github.com/google/closure-library/archive/v20200927.tar.gz",
         ],
-        sha256 = "d21fdefb72d88a1aa629279c53a95fdd4d5632d0e5b13e6b591b177d25bde337",
-        strip_prefix = "closure-library-20191027",
+        sha256 = "e1545483c9a1ca1502a9c534270c0e5a67f4f8540a6e76ea02a17c6f91d9318e",
+        strip_prefix = "closure-library-20200927",
         build_file = str(Label("//closure/library:closure_library.BUILD")),
     )
 

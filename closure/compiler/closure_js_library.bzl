@@ -142,6 +142,9 @@ def _closure_js_library_impl(
             "superfluousSuppress",
             "unnecessaryEscape",
             "underscore",
+            "useOfGoogProvide",
+            "stricterMissingRequireInProvidesFile",
+            "stricterMissingRequireTypeInProvidesFile",
         ]
 
     # TODO(yannic): Always use |actions.declare_file()|.

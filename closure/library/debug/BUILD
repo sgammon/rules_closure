@@ -13,6 +13,7 @@ closure_js_library(
         ":console",
         ":debug",
         ":debugwindow",
+        ":deepfreeze",
         ":divconsole",
         ":entrypointregistry",
         ":error",
@@ -40,6 +41,7 @@ closure_js_library(
     deps = [
         "//closure/library/debug:formatter",
         "//closure/library/debug:logger",
+        "//closure/library/log",
     ],
 )
 
@@ -60,14 +62,21 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/debug:formatter",
-        "//closure/library/debug:logger",
         "//closure/library/dom:safe",
         "//closure/library/html:safehtml",
         "//closure/library/html:safestylesheet",
+        "//closure/library/log",
         "//closure/library/string:const",
         "//closure/library/structs:circularbuffer",
         "//closure/library/useragent",
     ],
+)
+
+closure_js_library(
+    name = "deepfreeze",
+    srcs = ["@com_google_javascript_closure_library//:closure/goog/debug/deepfreeze.js"],
+    lenient = True,
+    deps = ["//closure/library/debug"],
 )
 
 closure_js_library(
@@ -76,12 +85,12 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/debug:formatter",
-        "//closure/library/debug:logger",
         "//closure/library/dom",
         "//closure/library/dom:safe",
         "//closure/library/dom:tagname",
         "//closure/library/html:safehtml",
         "//closure/library/html:safestylesheet",
+        "//closure/library/log",
         "//closure/library/string:const",
         "//closure/library/style",
     ],
@@ -137,13 +146,13 @@ closure_js_library(
         "//closure/library/debug:error",
         "//closure/library/debug:errorcontext",
         "//closure/library/debug:errorhandler",
+        "//closure/library/disposable",
         "//closure/library/events",
         "//closure/library/events:event",
         "//closure/library/events:eventtarget",
         "//closure/library/log",
         "//closure/library/net:xhrio",
         "//closure/library/object",
-        "//closure/library/string",
         "//closure/library/uri:utils",
         "//closure/library/useragent",
     ],
@@ -192,6 +201,7 @@ closure_js_library(
     deps = [
         "//closure/library/asserts",
         "//closure/library/async:animationdelay",
+        "//closure/library/disposable",
         "//closure/library/dom",
         "//closure/library/dom:tagname",
         "//closure/library/ui:component",
@@ -252,6 +262,7 @@ closure_js_library(
     deps = [
         "//closure/library/array",
         "//closure/library/asserts",
+        "//closure/library/debug",
         "//closure/library/debug:logger",
         "//closure/library/iter",
         "//closure/library/log",

@@ -10,6 +10,7 @@ load("//closure:defs.bzl", "closure_js_library")
 closure_js_library(
     name = "all_js",
     exports = [
+        ":blob",
         ":entry",
         ":entryimpl",
         ":error",
@@ -22,6 +23,13 @@ closure_js_library(
         ":progressevent",
         ":url",
     ],
+)
+
+closure_js_library(
+    name = "blob",
+    srcs = ["@com_google_javascript_closure_library//:closure/goog/fs/blob.js"],
+    lenient = True,
+    deps = ["//closure/library/array"],
 )
 
 closure_js_library(
@@ -111,12 +119,9 @@ closure_js_library(
     srcs = ["@com_google_javascript_closure_library//:closure/goog/fs/fs.js"],
     lenient = True,
     deps = [
-        "//closure/library/array",
         "//closure/library/fs:error",
-        "//closure/library/fs:filereader",
         "//closure/library/fs:filesystemimpl",
         "//closure/library/fs:url",
-        "//closure/library/useragent",
         "//third_party/closure/library/mochikit/async:deferred",
     ],
 )

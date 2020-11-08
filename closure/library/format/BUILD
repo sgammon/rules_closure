@@ -22,7 +22,11 @@ closure_js_library(
     name = "emailaddress",
     srcs = ["@com_google_javascript_closure_library//:closure/goog/format/emailaddress.js"],
     lenient = True,
-    deps = ["//closure/library/string"],
+    deps = [
+        "//closure/library/i18n:bidi",
+        "//closure/library/object",
+        "//closure/library/string",
+    ],
 )
 
 closure_js_library(

@@ -19,6 +19,7 @@ closure_js_library(
     deps = [
         "//closure/library/async:animationdelay",
         "//closure/library/async:delay",
+        "//closure/library/disposable",
         "//closure/library/object",
     ],
 )

@@ -244,6 +244,7 @@ closure_js_library(
     lenient = True,
     deps = [
         "//closure/library/editor:command",
+        "//closure/library/editor:link",
         "//closure/library/editor:plugin",
     ],
 )
@@ -286,11 +287,13 @@ closure_js_library(
         "//closure/library/dom",
         "//closure/library/dom:nodetype",
         "//closure/library/dom:range",
+        "//closure/library/dom:safe",
         "//closure/library/dom:tagname",
         "//closure/library/editor:browserfeature",
         "//closure/library/editor:node",
         "//closure/library/editor:plugin",
         "//closure/library/editor:range",
+        "//closure/library/html:legacyconversions",
         "//closure/library/string",
         "//closure/library/useragent",
     ],
