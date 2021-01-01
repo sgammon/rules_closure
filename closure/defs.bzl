@@ -26,6 +26,7 @@ load("//closure/templates:closure_java_template_library.bzl", _closure_java_temp
 load("//closure/templates:closure_js_template_library.bzl", _closure_js_template_library = "closure_js_template_library")
 load("//closure/templates:closure_py_template_library.bzl", _closure_py_template_library = "closure_py_template_library")
 load("//closure/templates:closure_templates_plugin.bzl", _closure_templates_plugin = "closure_templates_plugin")
+load("//closure/templates:closure_messages.bzl", _closure_messages = "closure_messages")
 load("//closure/testing:closure_js_test.bzl", _closure_js_test = "closure_js_test")
 load("//closure/testing:phantomjs_test.bzl", _phantomjs_test = "phantomjs_test")
 load("//closure:filegroup_external.bzl", _filegroup_external = "filegroup_external")
@@ -48,6 +49,7 @@ closure_java_template_library = _closure_java_template_library
 closure_js_template_library = _closure_js_template_library
 closure_py_template_library = _closure_py_template_library
 closure_templates_plugin = _closure_templates_plugin
+closure_messages = _closure_messages
 closure_js_test = _closure_js_test
 phantomjs_test = _phantomjs_test
 filegroup_external = _filegroup_external
